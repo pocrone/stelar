@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Basic Page Needs
+  ================================================== -->
+    <meta charset="utf-8">
+    <title>Login | Stelar</title>
+
+    <!-- Mobile Specific Metas
+  ================================================== -->
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+
+    <!-- PLUGINS CSS STYLE -->
+    <link rel="stylesheet" href="{{ asset('assets/landing-page/plugins/bootstrap/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/landing-page/plugins/themify-icons/themify-icons.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/landing-page/plugins/slick/slick.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/landing-page/plugins/slick/slick-theme.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/landing-page/plugins/fancybox/jquery.fancybox.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/landing-page/plugins/aos/aos.css') }}">
+    <!-- CUSTOM CSS -->
+    <link href="{{ asset('assets/landing-page/css/style.css') }}" rel="stylesheet">
+
+</head>
+
+<body class="body-wrapper" data-spy="scroll" data-target=".privacy-nav">
+
+
+    <section class="user-login section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="block">
+                        <!-- Image -->
+                        <div class="image align-self-center"><img class="img-fluid"
+                                src="{{ asset('assets/landing-page/images/Login/students-gc3941db2f_1920.jpg') }}"
+                                alt="desk-image"></div>
+                        <!-- Content -->
+                        <div class="content text-center">
+                            <div class="logo mb-0">
+                                <a href="index.html"><img src="{{ asset('assets/landing-page/images/logos.png') }}"
+                                        style="width: 150px;" alt=""></a>
+                            </div>
+                            <div class="title-text">
+                                <h3>Masuk ARSIPEDIA</h3>
+                            </div>
+                            <form action="{{ route('login') }}" method="POST">
+                                @csrf
+                                <!-- Username -->
+                                <input class="form-control main" type="email" name='email' placeholder="E-mail"
+                                    required>
+                                <!-- Password -->
+                                <input class="form-control main" type="password" name="password"
+                                    placeholder="Kata Sandi" required>
+                                <!-- Submit Button -->
+                                <button class="btn btn-main-sm">Masuk</button>
+                            </form>
+                            <div class="new-acount">
+                                <p>Tidak memiliki akun? <a class="text-info" href="{{ route('register') }}"> &nbsp;
+                                        DAFTAR SEKARANG</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- To Top -->
+    <div class="scroll-top-to">
+        <i class="ti-angle-up"></i>
+    </div>
+
+    <!-- JAVASCRIPTS -->
+    <script src="{{ asset('assets/landing-page/plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/landing-page/plugins/bootstrap/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/landing-page/plugins/slick/slick.min.js') }}"></script>
+    <script src="{{ asset('assets/landing-page/plugins/fancybox/jquery.fancybox.min.js') }}"></script>
+    <script src="{{ asset('assets/landing-page/plugins/syotimer/jquery.syotimer.min.js') }}"></script>
+    <script src="{{ asset('assets/landing-page/plugins/aos/aos.js') }}"></script>
+    <!-- google map -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgeuuDfRlweIs7D6uo4wdIHVvJ0LonQ6g"></script>
+    {{-- <script src="plugins/google-map/gmap.js"></script> --}}
+
+    <script src="{{ asset('assets/landing-page/js/script.js') }}"></script>
+</body>
+
+</html>
