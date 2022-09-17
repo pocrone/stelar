@@ -94,7 +94,8 @@ class CompanyController extends Controller
         $user_group->user_id = Auth::id();
         $user_group->save();
 
-        return redirect('/siswa/company')->with('success', 'Kamu telah berhasil membuat perusahaan/kelompok baru');
+        return redirect('/siswa/company')
+            ->with('success', 'Kamu telah berhasil membuat perusahaan/kelompok baru');
     }
 
     public function joinCompany(Request $request)

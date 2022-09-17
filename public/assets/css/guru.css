@@ -1,0 +1,25 @@
+.main-panel .content-wrapper .card-basic {
+    background-size: cover;
+    background-image: linear-gradient(to right bottom, #0066ff, #2451d0, #283da3, #232b78, #1a1a51);
+    border-radius: 20px;
+}
+.card-link{
+    color: #3e4b5b;
+    padding: 2rem;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    background-color: #eaf0ff;
+}
+.icons{
+    width: 20px;
+}
+.vector{
+    margin: auto;
+    width: 50%;
+    text-align: center;
+}
+.big-input{
+    font-size: 17px;
+    border-radius: 10px;
+}

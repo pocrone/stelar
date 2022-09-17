@@ -14,6 +14,13 @@ use App\Http\Controllers\Siswa\Leader\LeaderInboxMailsContoller;
 use App\Http\Controllers\Siswa\Leader\LeaderMailConceptController;
 use App\Http\Controllers\Siswa\Secretary\SecretaryClassification;
 use App\Http\Controllers\Siswa\Secretary\SecretaryDashboard;
+use App\Http\Controllers\Guru\ClassController;
+use App\Http\Controllers\Guru\LessonController;
+use App\Http\Controllers\Guru\AssignmentController;
+use App\Http\Controllers\Guru\ProgressController;
+use App\Http\Controllers\Guru\StudentsController;
+use App\Http\Controllers\Guru\LeaderController;
+use PhpParser\Builder\ClassConst;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +41,45 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth', 'role:1'])->group(function () {
     Route::prefix('guru')->group(function () {
+        //manage class
+        Route::get('/create_class', [ClassController::class, 'createClass'])->name('create_class');
+        Route::post('/store_class', [ClassController::class, 'store'])->name('store_class');
+        Route::get('/course/{id}', [ClassController::class, 'index'])->name('course');
+        Route::get('/edit_class/{id}', [ClassController::class, 'edit'])->name('edit_class');
+        Route::post('/update_class', [ClassController::class, 'update'])->name('update_class');
+        Route::get('/delete_class/{id}', [ClassController::class, 'delete'])->name('delete_class');
+        //manage lesson
+        Route::get('/lessons/{id}', [LessonController::class, 'index'])->name('lessons');
+        Route::get('/create_lesson/{id}', [LessonController::class, 'create'])->name('create_lesson');
+        Route::post('/insert_lesson', [LessonController::class, 'insert'])->name('insert_lesson');
+        Route::get('/show_lesson/{classroom_id}/{lesson_id}', [LessonController::class, 'show'])->name('show_lesson');
+        Route::get('/download_lesson/{lesson_id}', [LessonController::class, 'download'])->name('download_lesson');
+        Route::get('/edit_lesson/{lesson_id}', [LessonController::class, 'edit'])->name('edit_lesson');
+        Route::post('/update_lesson/{lesson_id}', [LessonController::class, 'update'])->name('update_lesson');
+        Route::get('/delete_lesson/{lesson_id}', [LessonController::class, 'delete'])->name('delete_lesson');
+        Route::get('/delete_attachment/{lesson_id}', [LessonController::class, 'delete_attachment'])->name('delete_attachment');
+        //manage assignment
+        Route::get('/create_assignment/{classroom_id}', [AssignmentController::class, 'create'])->name('create_assignment');
+        Route::post('/insert_assignment', [AssignmentController::class, 'insert'])->name('insert_assignment');
+        Route::get('/show_assignment/{classroom_id}/{assignment_id}', [AssignmentController::class, 'show'])->name('show_assignment');
+        Route::get('/edit_assignment/{assignment_id}', [AssignmentController::class, 'edit'])->name('edit_assignment');
+        Route::get('/delete_assignment/{assignment_id}', [AssignmentController::class, 'delete'])->name('delete_assignment');
+        Route::get('/download_assignment/{assignment_id}', [AssignmentController::class, 'download'])->name('download_assignment');
+        Route::get('/edit_assignment/{assignment_id}', [AssignmentController::class, 'edit'])->name('edit_assignment');
+        Route::post('/update_assignment/{assignment_id}', [AssignmentController::class, 'update'])->name('update_assignment');
+        Route::get('/delete_attachment_asg/{assignment_id}', [AssignmentController::class, 'delete_attachment'])->name('delete_attachment_asg');
+        // manage students
+        Route::get('/students/{classroom_id}', [StudentsController::class, 'index'])->name('students');
+        Route::get('/delete_student/{user_id}', [StudentsController::class, 'delete'])->name('delete_student');
+        Route::get('/groups/{classroom_id}', [StudentsController::class, 'groups'])->name('groups');
+        //evaluation
+        Route::get('/progress/{group_id}', [ProgressController::class, 'index'])->name('progress');
+        Route::post('/evaluate', [ProgressController::class, 'evaluate'])->name('evaluate');
+        //leader data
+        Route::get('/leader_concept/{group_id}', [LeaderController::class, 'leader_concept'])->name('leader_concept');
+        Route::get('/leader_concept_data/{group_id}', [LeaderController::class, 'leader_concept_data'])->name('leader_concept_data');
+        Route::get('/leader_inbox/{group_id}', [LeaderController::class, 'leader_inbox'])->name('leader_inbox');
+        Route::get('/leader_inbox_data/{group_id}', [LeaderController::class, 'leader_inbox_data'])->name('leader_inbox_data');
     });
 });
 Route::middleware(['auth', 'role:2'])->group(function () {
