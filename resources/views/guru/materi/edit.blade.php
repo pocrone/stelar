@@ -7,13 +7,7 @@
 @stop
 
 @section('content')
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
-            <li class="breadcrumb-item " aria-current="page"><a href="{{ route('course', ['id' => $id]) }}">Kelas</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Edit Materi</li>
-        </ol>
-    </nav>
+
     <div class="row">
         <div class="card w-100">
             <div class="card-header">Edit Materi</div>
@@ -50,7 +44,7 @@
                         <textarea class="form-control" id="content" name="content" rows="">{{ $lesson->content }}</textarea>
                     </div>
                     <input type="hidden" name="lesson_id" value="{{ $lesson->id }}">
-                    <input type="submit" value="Simpan">
+                    <input type="submit" class="btn btn-primary btn-lg" value="Simpan">
                 </form>
             </div>
         </div>

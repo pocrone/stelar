@@ -61,7 +61,7 @@ class StudentsController extends Controller
                     return $student_count;
                 })
                 ->addColumn('action', function ($group) {
-                    $btn = '<a href="' . route('progress', ['group_id' => $group->idg]) . '">Lihat Progress</a>';
+                    $btn = '<a target="_blank" href="' . route('progress', ['group_id' => $group->idg]) . '">Lihat Progress</a>';
                     return $btn;
                 })
                 ->addIndexColumn()

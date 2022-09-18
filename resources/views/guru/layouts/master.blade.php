@@ -100,7 +100,7 @@
             @yield('navbar')
         </div>
         <!-- partial -->
-        <div class="container-fluid page-body-wrapper">
+        <div class="container-fluid page-body-wrapper" style="margin-bottom: 2rem">
             <div class="main-panel">
                 <div class="content-wrapper pb-0">
                     @yield('content')

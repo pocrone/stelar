@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Guru;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Guru_AssignmentRequest;
 use App\Models\Assignments;
+use App\Models\Classroom;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -20,6 +21,7 @@ class AssignmentController extends Controller
         $data = [
             'nama' => auth()->user()->name,
             'id' => $classroom_id,
+            'class_name' => Classroom::find($classroom_id)->class_name
         ];
         return view('guru.tugas.create', $data);
     }
@@ -60,7 +62,9 @@ class AssignmentController extends Controller
         $data = [
             'nama' => auth()->user()->name,
             'id' => $classroom_id,
-            'assignment' => Assignments::find($assignment_id)
+            'assignment' => Assignments::find($assignment_id),
+            'class_name' => Classroom::find($classroom_id)->class_name
+
 
         ];
         return view('guru.tugas.index', $data);
@@ -89,7 +93,9 @@ class AssignmentController extends Controller
         $data = [
             'nama' => auth()->user()->name,
             'id' => $classroom_id,
-            'assignment' => Assignments::find($assignment_id)
+            'assignment' => Assignments::find($assignment_id),
+            'class_name' => Classroom::find($classroom_id)->class_name
+
 
         ];
         return view('guru.tugas.edit', $data);

@@ -9,30 +9,29 @@
 @section('content')
     <div class="row">
         <div class="col-md-6">
+            <div class="vector">
+                <img src="{{ asset('assets/images/vector/Schedule.svg') }}" alt="" srcset="">
+
+            </div>
+        </div>
+        <div class="col-md-6">
             <div class="card">
-                <div class="card-header">
-                    Ubah kelas
-                </div>
-                <div class="card-body">
-                    <form method="post" action="{{ route('update_class') }}" class="form-inline">
+
+                <div class="card-body text-center p-5 my-5">
+                    <form method="post" action="{{ route('update_class') }}">
                         @csrf
                         @error('class_name')
                             {{ $message }}
                         @enderror
-                        <div class="input-group mb-2 mr-sm-2">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text bg-primary">Nama Kelas</div>
-                            </div>
-                            <input type="text" class="form-control" name='class_name' id="inlineFormInputGroupUsername2"
-                                value="{{ $classroom->class_name }}" placeholder="Masukkan Nama Kelas" />
-                        </div>
-                        <input type="hidden" name="id" value="{{ $classroom->id }}">
-                        <div class="input-group mb-2 mr-sm-2">
-                            <button type="submit" class="btn btn-primary btn-md"> Simpan </button>
-                        </div>
+                        <h3 class="mb-3">Ubah Nama Kelas</h3>
+                        <input type="text" class="form-control big-input mb-3" name='class_name'
+                            id="inlineFormInputGroupUsername2" value="{{ $classroom->class_name }}"
+                            placeholder="Masukkan Nama Kelas" />
+                        <button type="submit" class="btn btn-primary btn-lg"> Simpan </button>
+                        <input type="hidden" name="id" value="{{ $id }}">
                     </form>
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#hapusKelas">
+                    <button type="button" class="btn btn-danger mt-3" data-toggle="modal" data-target="#hapusKelas">
                         Hapus Kelas
                     </button>
 

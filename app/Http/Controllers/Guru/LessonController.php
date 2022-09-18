@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Guru;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Guru_LessonRequest;
+use App\Models\Classroom;
 use App\Models\Lessons;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
@@ -23,6 +24,7 @@ class LessonController extends Controller
         $data = [
             'nama' => auth()->user()->name,
             'id' => $id,
+            'class_name' => Classroom::find($id)->class_name
 
         ];
         return view('guru.materi.create', $data);
@@ -64,7 +66,8 @@ class LessonController extends Controller
         $data = [
             'nama' => auth()->user()->name,
             'id' => $classroom_id,
-            'lesson' => Lessons::find($lesson_id)
+            'lesson' => Lessons::find($lesson_id),
+            'class_name' => Classroom::find($classroom_id)->class_name
 
         ];
         return view('guru.materi.index', $data);
@@ -93,7 +96,9 @@ class LessonController extends Controller
         $data = [
             'nama' => auth()->user()->name,
             'id' => $classroom_id,
-            'lesson' => Lessons::find($lesson_id)
+            'lesson' => Lessons::find($lesson_id),
+            'class_name' => Classroom::find($classroom_id)->class_name
+
 
         ];
         return view('guru.materi.edit', $data);

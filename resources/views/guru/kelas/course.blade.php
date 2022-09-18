@@ -7,54 +7,63 @@
 @stop
 
 @section('content')
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Kelas</li>
-        </ol>
-    </nav>
+
     <div class="row">
+        <div class="col-md-3">
+            <div class="card card-banner">
+                <span class="small">Kode Kelas</span>
+                <span class="h1"> {{ $course->class_code }}</span>
 
-        <div class="col-md-6"> nama kelas {{ $course->class_name }}
+            </div>
         </div>
-        <div class="col-md-6">
-            jumlah siswa {{ $jumlah_siswa }}
-            <a href="">Daftar nama siswa</a>
+        <div class="col-md-3">
+            <div class="card card-banner">
+                <span class="small">Siswa</span>
+                <span class="h1">{{ $jumlah_siswa }}</span>
+            </div>
         </div>
-        <div class="col-md-6"> kode kelas {{ $course->class_code }}</div>
+        <div class="col-md-3">
+            <div class="card card-banner">
+                <span class="small">Materi</span>
+                <span class="h1">{{ $count_lesson }}</span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-banner">
+                <span class="small">Tugas</span>
+                <span class="h1">{{ $count_assignments }}</span>
+            </div>
+        </div>
 
-        <div class="col-md-6"> Jumlah kelompok
-            <a href="">Daftar kelompok</a>
-        </div>
-
-        <div class="col-md-6">jumlah materi
-            <a href="{{ route('lessons', [$course->id]) }}">Manajemen materi</a>
-        </div>
-
-        <div class="col-md-6">jumlah tugas
-            <a href="">Manajemen tugas</a>
-        </div>
-        <div class="col-md-6">
-            <a href="{{ route('edit_class', ['id' => $course->id]) }}">Pengaturan Kelas</a>
-        </div>
 
     </div>
-    <div class="row">
+    <div class="row mt-4">
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    MATERI
+                    Materi
                 </div>
                 <div class="card-body">
-                    <a href="{{ route('create_lesson', ['id' => $id]) }}" class="btn btn-primary">Buat
-                        materi</a>
+                    <a href="{{ route('create_lesson', ['id' => $id]) }}" class="btn btn-primary text-center">
+                        <i class="mdi mdi-plus menu-icon"></i>
+                        Tambah Materi
+                    </a>
                     <hr>
-                    @foreach ($lessons as $row)
-                        <div class="row">
-                            <a
-                                href="{{ route('show_lesson', ['classroom_id' => $row->classroom_id, 'lesson_id' => $row->id]) }}">{{ $row->title }}</a>
+                    @forelse ($lessons as $row)
+                        <div class="d-block mb-3">
+                            <a class="text-black"
+                                href="{{ route('show_lesson', ['classroom_id' => $row->classroom_id, 'lesson_id' => $row->id]) }}">
+                                <i class="mdi mdi-book menu-icon"></i>
+                                {{ $row->title }}
+                                <i class="mdi mdi-chevron-triple-right menu-icon"></i>
+                            </a>
                         </div>
-                    @endforeach
+                    @empty
+                        <div class="vector">
+                            <img src="{{ asset('assets/images/vector/Match.svg') }}" alt="" srcset="">
+                            Tidak ada materi
+                        </div>
+                    @endforelse
 
                 </div>
             </div>
@@ -62,18 +71,31 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    TUGAS
+                    Tugas
                 </div>
                 <div class="card-body">
-                    <a href="{{ route('create_assignment', ['classroom_id' => $id]) }}" class="btn btn-primary">Buat
+                    <a href="{{ route('create_assignment', ['classroom_id' => $id]) }}" class="btn btn-primary">
+                        <i class="mdi mdi-plus menu-icon"></i>
+
+                        Tambah
                         Tugas</a>
                     <hr>
-                    @foreach ($assignments as $row)
-                        <div class="row">
-                            <a
-                                href="{{ route('show_assignment', ['classroom_id' => $row->classroom_id, 'assignment_id' => $row->id]) }}">{{ $row->title }}</a>
+                    @forelse ($assignments as $row)
+                        <div class="d-block mb-3">
+                            <a class="text-black"
+                                href="{{ route('show_assignment', ['classroom_id' => $row->classroom_id, 'assignment_id' => $row->id]) }}">
+                                <i class="mdi mdi-bookmark-multiple menu-icon"></i>
+
+                                {{ $row->title }}
+                                <i class="mdi mdi-chevron-triple-right menu-icon"></i>
+                            </a>
                         </div>
-                    @endforeach
+                    @empty
+                        <div class="vector">
+                            <img src="{{ asset('assets/images/vector/Match.svg') }}" alt="" srcset="">
+                            Tidak ada tugas
+                        </div>
+                    @endforelse
                 </div>
             </div>
         </div>

@@ -7,19 +7,16 @@
 @stop
 
 @section('content')
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
-            <li class="breadcrumb-item " aria-current="page"><a href="{{ route('course', ['id' => $id]) }}">Kelas</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Data Siswa Kelas {{ $class_name }}</li>
-        </ol>
-    </nav>
+
     <div class="row">
         <div class="card w-100">
             <div class="card-header">Data Kelompok Kelas {{ $class_name }}</div>
             <div class="card-body">
                 @if ($count_students == 0)
-                    Belum ada kelompok yang dibuat
+                    <div class="vector">
+                        <img src="{{ asset('assets/images/vector/Match.svg') }}" alt="" srcset="">
+                        Belum ada kelompok
+                    </div>
                 @else
                     <table class="table table-bordered w-100" id="groups-table">
                         <thead>

@@ -7,13 +7,7 @@
 @stop
 
 @section('content')
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
-            <li class="breadcrumb-item " aria-current="page"><a href="{{ route('course', ['id' => $id]) }}">Kelas</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Edit Tugas</li>
-        </ol>
-    </nav>
+
     <div class="row">
         <div class="card w-100">
             <div class="card-header">Edit Tugas</div>
@@ -26,7 +20,7 @@
                     @enderror
                     <div class="form-group">
                         <label for="title">Judul Tugas</label>
-                        <input type="text" class="form-control" id="title" placeholder="Judul materi" name="title"
+                        <input type="text" class="form-control" id="title" placeholder="Judul tugas" name="title"
                             value="{{ $assignment->title }}">
                     </div>
                     <div class="form-group">
@@ -52,7 +46,7 @@
                         <textarea class="form-control" id="content" name="content" rows="">{{ $assignment->content }}</textarea>
                     </div>
                     <input type="hidden" name="assignment_id" value="{{ $assignment->id }}">
-                    <input type="submit" value="Simpan">
+                    <input type="submit" value="Simpan" class="btn btn-primary btn-lg">
                 </form>
             </div>
         </div>

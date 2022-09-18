@@ -1,9 +1,9 @@
 <nav class="bottom-navbar">
     <div class="container">
-        <ul class="nav page-navigation bg-info" style="justify-content:center">
+        <ul class="nav page-navigation title-nav" style="justify-content:center">
             <li class="nav-item pr-5">
                 <a class="nav-link" href="#">
-                    <span>Progress Kelompok: {{ $group->groupname }}</span>
+                    <span class="h5">Progress Kelompok: {{ $group->groupname }}</span>
                 </a>
             </li>
 

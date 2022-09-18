@@ -7,13 +7,7 @@
 @stop
 
 @section('content')
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
-            <li class="breadcrumb-item " aria-current="page"><a href="{{ route('course', ['id' => $id]) }}">Kelas</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Buat Materi</li>
-        </ol>
-    </nav>
+
     <div class="row">
         <div class="card w-100">
             <div class="card-header">Buat Materi</div>
@@ -38,7 +32,7 @@
                     </div>
                     <input type="hidden" name="classroom_id" value="{{ $id }}">
 
-                    <input type="submit" value="Simpan">
+                    <input type="submit" value="Simpan" class="btn btn-primary btn-lg">
                 </form>
             </div>
         </div>

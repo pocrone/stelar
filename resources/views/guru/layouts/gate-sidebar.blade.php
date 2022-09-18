@@ -1,9 +1,9 @@
 <nav class="bottom-navbar">
     <div class="container">
-        <ul class="nav page-navigation bg-info" style="justify-content:center">
+        <ul class="nav page-navigation title-nav" style="justify-content:center">
             <li class="nav-item pr-5">
                 <a class="nav-link" href="#">
-                    <span>Kelas ABC</span>
+                    <span class="h5">Kelas {{ $class_name }}</span>
                 </a>
             </li>
 
@@ -11,9 +11,9 @@
         </ul>
         <ul class="nav page-navigation" style="justify-content:center">
             <li class="nav-item pr-5">
-                <a class="nav-link" href="{{ route('home') }}">
+                <a class="nav-link" href="{{ route('course', ['id' => $id]) }}">
                     <i class="mdi mdi-compass-outline menu-icon"></i>
-                    <span class="menu-title">Dashboard</span>
+                    <span class="menu-title">Kelas</span>
                 </a>
             </li>
             <li class="nav-item pr-5">

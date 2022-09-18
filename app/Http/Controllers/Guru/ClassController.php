@@ -31,8 +31,11 @@ class ClassController extends Controller
             'course' => Classroom::find($id),
             'jumlah_siswa' => User::where('classroom_id', $id)->count(),
             'lessons' => Lessons::where('classroom_id', $id)->get(),
+            'count_lesson' => Lessons::where('classroom_id', $id)->count(),
             'assignments' => Assignments::where('classroom_id', $id)->get(),
-            'id' => $id
+            'count_assignments' => Assignments::where('classroom_id', $id)->count(),
+            'id' => $id,
+            'class_name' => Classroom::find($id)->class_name
 
         ];
         return view('guru.kelas.course', $data);
@@ -72,7 +75,9 @@ class ClassController extends Controller
         $data = [
             'nama' => auth()->user()->name,
             'classroom' => Classroom::find($id),
-            'id' => $id
+            'id' => $id,
+            'class_name' => Classroom::find($id)->class_name
+
         ];
         return view('guru.kelas.edit', $data);
     }
