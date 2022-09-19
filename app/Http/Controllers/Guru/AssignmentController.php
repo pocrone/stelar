@@ -5,10 +5,14 @@ namespace App\Http\Controllers\Guru;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Guru_AssignmentRequest;
 use App\Models\Assignments;
+use App\Models\GroupAssignments;
 use App\Models\Classroom;
+use App\Models\Group;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
+
 
 class AssignmentController extends Controller
 {
@@ -57,18 +61,50 @@ class AssignmentController extends Controller
         }
         return redirect('guru/show_assignment/' . $id . '/' . $assignment_id);
     }
-    public function show($classroom_id, $assignment_id)
+    public function show(Request $request, $classroom_id, $assignment_id)
     {
+        $group = Group::where('classroom_id', $classroom_id)->get();
+        foreach ($group as $array) {
+            $array->value = "";
+            if ($this->checkValue($assignment_id, $array->id)) {
+                $array->value = $this->getValue($assignment_id, $array->id);
+                $array->comment = $this->getComment($assignment_id, $array->id);
+            } else {
+                $array->value = NULL;
+                $array->comment = NULL;
+            }
+        }
+
+        if ($request->ajax()) {
+
+            return Datatables::of($group)
+                ->addColumn('value', function ($group) {
+                    $val = $group->value;
+                    return $val;
+                })
+                ->addColumn('comment', function ($group) {
+                    $val = $group->comment;
+                    return $val;
+                })
+                ->addColumn('action', function ($group) {
+                    $btn = '<a href=' .
+                        route('progress', ['group_id' => $group->id]) .
+                        '>Lihat Progress</a>';
+                    return $btn;
+                })
+                ->addIndexColumn()
+                ->make(true);
+        }
         $data = [
             'nama' => auth()->user()->name,
             'id' => $classroom_id,
+            'assignment_id' => $assignment_id,
             'assignment' => Assignments::find($assignment_id),
             'class_name' => Classroom::find($classroom_id)->class_name
-
-
         ];
         return view('guru.tugas.index', $data);
     }
+
     public function download($assignment_id)
     {
         $fileName = Assignments::find($assignment_id)->attachment;
@@ -143,5 +179,23 @@ class AssignmentController extends Controller
             'attachment' => ''
         ]);
         return redirect('guru/edit_assignment/' . $assignment_id);
+    }
+    private function checkValue($assignment_id, $group_id)
+    {
+        $check = GroupAssignments::where('assignments_id', $assignment_id)
+            ->where('group_id', $group_id)->exists();
+        return $check;
+    }
+    private function getValue($assignment_id, $group_id)
+    {
+        $value = GroupAssignments::where('assignments_id', $assignment_id)
+            ->where('group_id', $group_id)->first()->value;
+        return $value;
+    }
+    private function getComment($assignment_id, $group_id)
+    {
+        $comment = GroupAssignments::where('assignments_id', $assignment_id)
+            ->where('group_id', $group_id)->first()->comment;
+        return $comment;
     }
 }

@@ -57,11 +57,27 @@
         </div>
         <div class="col-md-10">
             <div class="card w-100">
-                <div class="card-header">{{ $assignment->title }}</div>
                 <div class="card-body">
-
-
+                    <h5>{{ $assignment->title }}</h5>
                     {!! $assignment->content !!}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-header">Rekap Nilai Tugas</div>
+                <div class="card-body">
+                    <table class="table " id=groups-table>
+                        <thead>
+                            <th>No.</th>
+                            <th>Nama Kelompok</th>
+                            <th>Nilai</th>
+                            <th>Komentar</th>
+                            <th>Opsi</th>
+                        </thead>
+                    </table>
+
                 </div>
             </div>
         </div>
@@ -72,4 +88,42 @@
 
 
 
+@endsection
+@section('customjs')
+    <script>
+        $(function() {
+            $('#groups-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{!! route('show_assignment', ['classroom_id' => $id, 'assignment_id' => $assignment_id]) !!}', // memanggil route yang menampilkan data json
+                columns: [{ // mengambil & menampilkan kolom sesuai tabel database
+                        data: 'DT_RowIndex',
+                        name: 'id'
+                    },
+                    {
+                        data: 'groupname',
+                        name: 'groupname'
+                    },
+                    {
+                        data: 'value',
+                        name: 'value'
+                    },
+                    {
+                        data: 'comment',
+                        name: 'comment'
+                    },
+
+                    {
+                        data: 'action',
+                        name: 'action',
+                        searchable: false,
+                        orderable: false,
+                    },
+
+
+                ],
+
+            });
+        });
+    </script>
 @endsection

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Siswa\Kelas;
 
 use App\Models\User;
 use App\Models\Classroom;
+use App\Models\Lessons;
+use App\Models\Assignments;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -21,11 +23,18 @@ class ClassDetailController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(Request $request)
+    public function index()
     {
-        $list_siswa = User::where('classroom_id', $request->id)->get();
+        // SELECT * FROM `classrooms` INNER JOIN users ON users.classroom_id=classrooms.id AND users.id=32;
+        $classroom = Classroom::join('users', 'users.classroom_id', '=', 'classrooms.id')
+            ->where('users.id', Auth::user()->id)->first();
+        $lessons = Lessons::where('classroom_id', $classroom->classroom_id)->get();
+        $assignments = Assignments::where('classroom_id', $classroom->classroom_id)->get();
+
         return view('siswa.kelas.classdetail')
-            ->with('list_siswa', $list_siswa)
+            ->with('classroom', $classroom)
+            ->with('lessons', $lessons)
+            ->with('assignments', $assignments)
             ->with('nama', auth()->user()->name);
     }
 

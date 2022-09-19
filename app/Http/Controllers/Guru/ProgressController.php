@@ -24,6 +24,7 @@ class ProgressController extends Controller
     {
         // SELECT * FROM `assignments` INNER JOIN groups ON groups.classroom_id=assignments.classroom_id LEFT OUTER JOIN group_assignments ON group_assignments.group_id=groups.id WHERE groups.id=2;
         $classroom_id = Group::find($group_id)->classroom_id;
+        $group_list = Group::where('classroom_id', $classroom_id)->get();
         $assignment_results = Assignments::select('assignments.*', 'groups.*', 'assignments.id as result_id')
             ->join('groups', 'groups.classroom_id', '=', 'assignments.classroom_id')
             ->where('assignments.classroom_id', $classroom_id)
@@ -52,7 +53,8 @@ class ProgressController extends Controller
             'group' => Group::find($group_id),
             'group_id' => $group_id,
             'user_group' => $user_group,
-            'assignment_results' => $assignment_results
+            'assignment_results' => $assignment_results,
+            'group_list' => $group_list
         ];
         return view('guru.progres.index', $data);
     }

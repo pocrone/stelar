@@ -22,6 +22,7 @@ class GroupSeeder extends Seeder
         for ($i = 1; $i <= 5; $i++) {
             DB::table('groups')->insert([
                 'groupname' => $faker->word(5),
+                'classroom_id' => $faker->randomElement($user_id),
                 'LeaderGroupID' => $faker->randomElement($user_id),
             ]);
         }

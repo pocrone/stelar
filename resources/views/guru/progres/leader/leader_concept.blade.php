@@ -1,32 +1,27 @@
 @extends('guru.layouts.master')
 
-@section('title', 'Pimpinan-Konsep Surat')
+@section('title', 'Pimpinan - Konsep Surat')
 
 @section('navbar')
     @include('guru.layouts.progress-sidebar')
 @stop
 
 @section('content')
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
 
-        </ol>
-    </nav>
     <div class="row">
-        <div class="card py-4 px-4">
-            <h4 class="card-title card-header d-flex justify-content-between align-items-center">
-                Konsep Surat </h4>
+        <div class="card w-100">
+            <div class="card-header">
+                Pimpinan - Konsep Surat
+            </div>
 
-            <div class="col-12 table table-responsive">
-                <table class="table table-bordered user_datatable wrap table-responsive">
+            <div class="card-body">
+                <table class="table user_datatable ">
                     <thead>
                         <tr>
                             <th>No</th>
                             <th>Nama Pimpinan</th>
                             <th>Konsep Surat</th>
                             <th>Status</th>
-
                         </tr>
 
                     </thead>
@@ -47,7 +42,7 @@
                 lengthChange: false,
                 processing: true,
                 serverSide: true,
-                ajax: '{!! route('leader_concept_data', ['group_id' => $group_id]) !!}', // memanggil route yang menampilkan data json
+                ajax: '{!! route('leader_concept_data', ['group_id' => $group_id]) !!}',
                 columns: [{
                         "data": null,
                         "searchable": false,

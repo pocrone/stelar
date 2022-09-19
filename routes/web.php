@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\Guru\ArchiveController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 
@@ -14,12 +14,14 @@ use App\Http\Controllers\Siswa\Leader\LeaderInboxMailsContoller;
 use App\Http\Controllers\Siswa\Leader\LeaderMailConceptController;
 use App\Http\Controllers\Siswa\Secretary\SecretaryClassification;
 use App\Http\Controllers\Siswa\Secretary\SecretaryDashboard;
+use App\Http\Controllers\Siswa\Kelas\LessonAssignmentController;
 use App\Http\Controllers\Guru\ClassController;
 use App\Http\Controllers\Guru\LessonController;
 use App\Http\Controllers\Guru\AssignmentController;
 use App\Http\Controllers\Guru\ProgressController;
 use App\Http\Controllers\Guru\StudentsController;
 use App\Http\Controllers\Guru\LeaderController;
+use App\Http\Controllers\Guru\SecretaryController;
 use PhpParser\Builder\ClassConst;
 
 /*
@@ -80,15 +82,51 @@ Route::middleware(['auth', 'role:1'])->group(function () {
         Route::get('/leader_concept_data/{group_id}', [LeaderController::class, 'leader_concept_data'])->name('leader_concept_data');
         Route::get('/leader_inbox/{group_id}', [LeaderController::class, 'leader_inbox'])->name('leader_inbox');
         Route::get('/leader_inbox_data/{group_id}', [LeaderController::class, 'leader_inbox_data'])->name('leader_inbox_data');
+        Route::get('/detail_inbox/{id}/{group_id}', [LeaderController::class, 'leader_detail_inbox'])->name('leader_detail_inbox');
+        Route::get('/disposition/{id}/{group_id}', [LeaderController::class, 'disposition'])->name('leader_dispositon_progress');
+        Route::get('/inbox_retensi/{group_id}', [LeaderController::class, 'inbox_retention'])->name('leader_inbox_retention');
+        Route::get('/outbox_retensi/{group_id}', [LeaderController::class, 'outbox_retention'])->name('leader_outbox_retention');
+        Route::get('/outbox_retensix/{group_id}', [LeaderController::class, 'outbox_retentionx'])->name('leader_outbox_retentionx');
+        //secretary data
+        //Klasfikasi
+        Route::get('/klasifikasi/{group_id}', [SecretaryController::class, 'classification'])->name('secretary_classification_progress');
+
+        //surat masuk
+        Route::get('/secretary_inbox/{group_id}', [SecretaryController::class, 'inbox'])->name('inbox_secretary_progress');
+        Route::get('/x/{group_id}', [SecretaryController::class, 'x'])->name('x');
+        Route::get('/inbox_detail/{id}/{group_id}', [SecretaryController::class, 'inbox_detail'])->name('inbox_detail_secretary');
+        Route::get('/disposition_progress/{id}', [SecretaryController::class, 'disposition'])->name('secretary_dispositon_progress');
+        //konsep surat
+        Route::get('/konsep_surat/{group_id}', [SecretaryController::class, 'concept'])->name('data_concept_progress');
+        // Route::get('/lihat_surat/{id}/{group_id}', [SecretaryController::class, 'mail'])->name('mail');
+        Route::get('/detail_surat_keluar/{id}', [SecretaryOutbox::class, 'detailMail'])->name('creatdetailMaile_outbox');
+        Route::get('/export_pdf/{id}', [SecretaryOutbox::class, 'exportPDF'])->name('exportPDF');
+
+        Route::get('/secretary_inbox_retensi/{group_id}', [SecretaryController::class, 'inbox_retention'])->name('inbox_retention_sec_progress');
+        Route::get('/secretary_outbox_retensi/{group_id}', [SecretaryController::class, 'outbox_retention'])->name('outbox_retention_sec_progress');
+
+        //arsiparis
+        Route::get('/inbox_archive_progress/{group_id}', [ArchiveController::class, 'inbox_archive_progress'])->name('inbox_archive_progress');
+        Route::get('/inbox_detail_progress/{id}/{group_id}', [ArchiveController::class, 'inbox_detail_progress'])->name('inbox_detail_progress');
+        Route::get('/disposition_archive/{id}', [ArchiveController::class, 'disposition'])->name('disposition_archive');
+        Route::get('/inbox_retensi_archive/{group_id}', [ArchiveController::class, 'inbox_retensi_archive'])->name('inbox_retensi_archive');
+        Route::get('/outbox_retensi_archive/{group_id}', [ArchiveController::class, 'outbox_retensi_archive'])->name('outbox_retensi_archive');
     });
 });
 Route::middleware(['auth', 'role:2'])->group(function () {
 
     // Pengelompokan Route Siswa dan Kelompok
     Route::prefix('siswa')->group(function () {
+        //tugas
+        Route::get('/tugas/{id_tugas}', [LessonAssignmentController::class, 'tugas'])->name('tugas');
+        Route::get('/materi/{id_materi}', [LessonAssignmentController::class, 'materi'])->name('materi');
+        Route::get('/download_tugas/{id_tugas}', [LessonAssignmentController::class, 'download_tugas'])->name('download_tugas');
+        Route::get('/download_materi/{id_materi}', [LessonAssignmentController::class, 'download_materi'])->name('download_materi');
+
+
         // Manajemen Kelas pada Siswa
         Route::get('/daftar_kelas', [ClassListController::class, 'index'])->name('std_list_class');
-        Route::get('/classdetail/{id}', [ClassDetailController::class, 'index'])->name('std_classdetail');
+        Route::get('/classdetail', [ClassDetailController::class, 'index'])->name('std_classdetail');
         Route::get('/exitclass/{id}', [ClassDetailController::class, 'exitclass'])->name('std_exitclass');
         Route::post('/join_class', [ClassListController::class, 'joinClass'])->name('join_class');
         // Manajemen Kelompok pada Siswa

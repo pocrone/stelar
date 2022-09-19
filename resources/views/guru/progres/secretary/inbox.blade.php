@@ -1,39 +1,34 @@
 @extends('guru.layouts.master')
 
-@section('title', 'Pimpinan - Surat Masuk')
+@section('title', 'Sekretaris - Surat Masuk')
 
 @section('navbar')
     @include('guru.layouts.progress-sidebar')
 @stop
 
 @section('content')
-    <div class="container">
 
-        <div class="row">
-            <div class="card w-100">
-                <div class="card-header">Pimpinan - Surat Masuk</div>
-                <div class="card-body">
-                    <table class="table inbox_datatable">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Nomor Surat</th>
-                                <th>Sifat Surat</th>
-                                <th>Detail Surat</th>
-                                <th>Pengirim</th>
-                                <th>Status</th>
-                                <th>Action</th>
+    <div class="row">
+        <div class="card w-100">
+            <div class="card-header">Sekretaris - Surat Masuk</div>
+            <div class="card-body">
+                <table class="table inbox_datatable" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Editor</th>
+                            <th>Nomor Surat</th>
+                            <th>Sifat Surat</th>
+                            <th>Detail Surat</th>
+                            <th>Pengirim</th>
+                            <th>Status</th>
+                            <th>Action</th>
 
-                            </tr>
+                        </tr>
 
-                        </thead>
-                        <tbody>
+                    </thead>
 
-                        </tbody>
-
-                    </table>
-
-                </div>
+                </table>
             </div>
 
         </div>
@@ -41,19 +36,24 @@
 
 @endsection
 @section('customjs')
-
     <script>
         $(document).ready(function() {
             var table = $('.inbox_datatable').DataTable({
-                lengthChange: false,
-                processing: true,
-                serverSide: true,
-                ajax: '{!! route('leader_inbox_data', ['group_id' => $group_id]) !!}', // memanggil route yang menampilkan data json
+                "serverSide": true,
+                "processing": true,
+                "ajax": {
+                    "url": '{{ route('inbox_secretary_progress', $group_id) }}',
+                    "dataType": "json",
+
+                },
                 "columns": [{
-                        "data": null,
+                        "data": "id",
                         "searchable": false,
                         "orderable": false,
                         "targets": 0,
+                    },
+                    {
+                        "data": "name"
                     },
                     {
                         "data": "mail_number"
@@ -72,9 +72,9 @@
                         "data": "status",
                         "render": function(data, type, row) {
                             if (data == '0')
-                                return "<label class='badge badge-warning'>Closed</label>";
+                                return 'Closed';
                             else
-                                return "<label class='badge badge-info'>Open</label>";
+                                return 'Open';
                         }
                     },
 
