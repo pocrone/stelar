@@ -2,7 +2,7 @@
     <div class="container">
         <ul class="nav page-navigation" style="justify-content:center">
             <li class="nav-item pr-5">
-                <a class="nav-link" href="{{ route('leaderdashboard') }}">
+                <a class="nav-link" href="{{ route('archivist_dashboard') }}">
                     <i class="mdi mdi-compass-outline menu-icon"></i>
                     <span class="menu-title">Dashboard</span>
                 </a>
@@ -16,30 +16,22 @@
                 <div class="submenu">
                     <ul class="submenu-item">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('mailconcept') }}">Konsep Surat</a>
+                            <a class="nav-link" href="{{ route('inbox_archivist') }}">Surat Masuk
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('autograph') }}">Data TTD</a>
+                            <a class="nav-link" href="{{ route('outbox_data_arc') }}">Surat Keluar
+                            </a>
                         </li>
+
 
                     </ul>
                 </div>
             </li>
-            <li class="nav-item pr-3">
-                <a class="nav-link" href="{{ route('inbox') }}">
-                    <i class="mdi mdi-compass-outline menu-icon"></i>
-                    <span class="menu-title">Surat Masuk</span>
-                </a>
-            </li>
-            <li class="nav-item pr-3">
-                <a class="nav-link" href="{{ route('mail_correct') }}">
-                    <i class="mdi mdi-compass-outline menu-icon"></i>
-                    <span class="menu-title">Koreksi Surat Keluar</span>
-                </a>
-            </li>
+
 
             <li class="d-flex nav-item pr-3">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('home') }}">
                     <i class="mdi mdi-compass-outline menu-icon"></i>
                     <span class="menu-title">Daftar Retensi</span>
                     <i class="menu-arrow"></i>
@@ -47,10 +39,10 @@
                 <div class="submenu">
                     <ul class="submenu-item">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('inbox_retention') }}">Surat Masuk</a>
+                            <a class="nav-link" href="{{ route('inbox_retention_arc') }}">Surat Masuk</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('outbox_retention') }}">Surat Keluar</a>
+                            <a class="nav-link" href="{{ route('outbox_retention_arc') }}">Surat Keluar</a>
                         </li>
 
                     </ul>

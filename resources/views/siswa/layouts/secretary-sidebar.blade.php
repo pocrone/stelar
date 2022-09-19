@@ -2,7 +2,7 @@
     <div class="container">
         <ul class="nav page-navigation" style="justify-content:center">
             <li class="nav-item pr-5">
-                <a class="nav-link" href="{{ route('home') }}">
+                <a class="nav-link" href="{{ route('secretary_dashboard') }}">
                     <i class="mdi mdi-compass-outline menu-icon"></i>
                     <span class="menu-title">Dashboard</span>
                 </a>
@@ -16,7 +16,8 @@
                 <div class="submenu">
                     <ul class="submenu-item">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('mailconcept') }}">Buat Klasifikasi Surat</a>
+                            <a class="nav-link" href="{{ route('secretary_classification') }}">Buat Klasifikasi
+                                Surat</a>
                         </li>
 
 
@@ -24,7 +25,7 @@
                 </div>
             </li>
             <li class="nav-item pr-3">
-                <a class="nav-link" href="{{ route('home') }}">
+                <a class="nav-link" href="{{ route('inbox_secretary') }}">
                     <i class="mdi mdi-compass-outline menu-icon"></i>
                     <span class="menu-title">Surat Masuk</span>
                 </a>
@@ -38,19 +39,19 @@
                 <div class="submenu">
                     <ul class="submenu-item">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('mailconcept') }}">Baca Konsep</a>
+                            <a class="nav-link" href="{{ route('data_concept') }}">Baca Konsep</a>
                         </li>
                     </ul>
                     <ul class="submenu-item">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('mailconcept') }}">Tulis Konsep</a>
+                            <a class="nav-link" href="{{ route('outbox_data') }}">Daftar Surat Keluar</a>
                         </li>
                     </ul>
                 </div>
             </li>
 
             <li class="d-flex nav-item pr-3">
-                <a class="nav-link" href="{{ route('home') }}">
+                <a class="nav-link" href="#">
                     <i class="mdi mdi-compass-outline menu-icon"></i>
                     <span class="menu-title">Daftar Retensi</span>
                     <i class="menu-arrow"></i>
@@ -58,10 +59,10 @@
                 <div class="submenu">
                     <ul class="submenu-item">
                         <li class="nav-item">
-                            <a class="nav-link" href="pages/ui-features/buttons.html">Surat Masuk</a>
+                            <a class="nav-link" href="{{ route('inbox_retention_sec') }}">Surat Masuk</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="pages/ui-features/dropdowns.html">Surat Keluar</a>
+                            <a class="nav-link" href="{{ route('outbox_retention_sec') }}">Surat Keluar</a>
                         </li>
 
                     </ul>

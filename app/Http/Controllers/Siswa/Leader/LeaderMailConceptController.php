@@ -57,7 +57,7 @@ class LeaderMailConceptController extends Controller
                         '<button data-toggle="modal"  onclick="getclick(' . $data['conceptID'] . ')"  data-target="#editKonsep" data-ID=' . $data['conceptID'] . ' id="edit_button" class=" btn-primary p-0">
                       <i class="mdi mdi-lead-pencil icon-sm"></i></button>' .
 
-                        '<form action="#" method="post" class="">' .
+                        '<form action="' . route('delete_concept', $data['conceptID']) . '" method="post" class="">' .
                         @csrf_field() . '
                     <button type="submit"  class=" btn-danger p-0"> <i class="mdi mdi-delete icon-sm"></i></button></form>' .
                         '</div>';
@@ -145,8 +145,10 @@ class LeaderMailConceptController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $edit_concept = MailConcept::find($request->id);
+        $edit_concept->delete();
+        return redirect()->back();
     }
 }

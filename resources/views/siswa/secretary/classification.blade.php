@@ -125,7 +125,7 @@
 
     <script>
         function getclick_2(id) {
-            var edit_url = "{{ route('edit_classification') }}" + '/' + id;
+            var edit_url = "{{ route('edit_classification', '') }}" + '/' + id;
             // var edit_url = $('#edit_form').attr('action') + id;
             console.log(id);
             console.log(edit_url);

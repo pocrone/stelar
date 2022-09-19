@@ -26,8 +26,9 @@ class LeaderInboxMailsContoller extends Controller
     {
         if ($request->ajax()) {
             $group_id = UserGroup::select('group_id')->where('user_id', Auth::id())->first();
-            $data = InboxMail::select('inbox_mails.*')
+            $data = InboxMail::select('inbox_mails.*', 'name')
                 ->join('groups', 'groups.id', '=', 'inbox_mails.group_id')
+                ->join('users', 'users.id', '=', 'inbox_mails.user_id')
                 ->where('group_id', $group_id->group_id)
                 ->get();
 
@@ -58,10 +59,11 @@ class LeaderInboxMailsContoller extends Controller
                 ->exists();
 
             if ($mail == 1) {
-                $mail_data = InboxMail::where('inbox_mails.id', $request->id)->first();
+                $mail_data = InboxMail::where('inbox_mails.id', $request->id)
+                    ->leftjoin('classifications', 'classifications.id', '=', 'inbox_mails.classification_id')->first();
                 $mail_data['status_disposition'] = 1;
             } else {
-                $mail_data = InboxMail::where('inbox_mails.id', $request->id)->first();
+                $mail_data = InboxMail::where('inbox_mails.id', $request->id)->leftjoin('classifications', 'classifications.id', '=', 'inbox_mails.classification_id')->first();
                 $mail_data['status_disposition'] = 0;
             }
 

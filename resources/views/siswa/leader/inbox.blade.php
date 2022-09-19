@@ -18,6 +18,7 @@
                         <thead class="bg-primary text-white">
                             <tr>
                                 <th>No</th>
+                                <th>Editor</th>
                                 <th>Nomor Surat</th>
                                 <th>Sifat Surat</th>
                                 <th>Detail Surat</th>
@@ -55,6 +56,9 @@
                         "searchable": false,
                         "orderable": false,
                         "targets": 0,
+                    },
+                    {
+                        "data": "name"
                     },
                     {
                         "data": "mail_number"

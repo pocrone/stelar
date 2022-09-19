@@ -85,7 +85,7 @@
                             dibuat pimpinan sebelumnya
                         </p>
                     </div>
-                    <a href="" class='btn btn-primary btn-sm btn-block mt-2 '>Masuk</a>
+                    <a href="{{ route('secretary_dashboard') }}" class='btn btn-primary btn-sm btn-block mt-2 '>Masuk</a>
                 </div>
             </div>
         </div>
@@ -105,7 +105,7 @@
                         </p>
 
                     </div>
-                    <a href="" class='btn btn-primary btn-sm btn-block mt-2'>Masuk</a>
+                    <a href="{{ route('archivist_dashboard') }}" class='btn btn-primary btn-sm btn-block mt-2'>Masuk</a>
                 </div>
             </div>
         </div>

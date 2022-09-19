@@ -47,6 +47,7 @@ class InboxMailSeeder extends Seeder
                 'inactive_year' => '2033',
                 'group_id' => $faker->randomElement($group_id),
                 'retention_status' => $faker->numberBetween('0', '3'),
+                'user_id' => $faker->randomElement($users),
 
             ]);
         }

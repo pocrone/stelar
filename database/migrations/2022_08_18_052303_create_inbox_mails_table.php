@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use App\Models\Group;
 use App\Models\Classroom;
 use App\Models\Classification;
@@ -34,6 +35,7 @@ return new class extends Migration
             $table->integer('inactive_year')->nullable();
             $table->foreignIdFor(Classroom::class);
             $table->foreignIdFor(Group::class);
+            $table->foreignIdFor(User::class);
         });
     }
 

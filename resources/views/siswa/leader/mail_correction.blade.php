@@ -1,6 +1,6 @@
 @extends('siswa.layouts.master')
 
-@section('title', 'Pimpinan | Konsep Surat')
+@section('title', 'Pimpinan | Koreksi Surat')
 
 @section('navbar')
     @include('siswa.layouts.leader-sidebar')
@@ -9,7 +9,6 @@
 @section('content')
     <div class="container">
 
-        <button data-toggle="modal" data-target="#addKonsep" class="btn btn-primary btn-md mb-2">Buat Konsep Surat</button>
         <div class="row ">
             <div class="card py-4 px-4 col-md-12">
                 <h4 class="card-title card-header d-flex justify-content-between align-items-center">
@@ -20,9 +19,10 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama</th>
-                                <th>Konsep Surat</th>
-                                <th>Status</th>
+                                <th>Editor</th>
+                                <th>Tanggal</th>
+                                <th>Perihal Surat</th>
+                                <th>Status Koreksi</th>
                                 <th>Action</th>
 
                             </tr>
@@ -96,7 +96,7 @@
                 lengthChange: false,
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('mailconcept_data') }}",
+                ajax: "{{ route('mail_correct') }}",
                 columns: [{
                         "data": null,
                         "searchable": false,
@@ -108,17 +108,26 @@
                         name: 'name'
                     },
                     {
-                        data: 'mail_concept',
-                        name: 'mail_concept'
+                        data: 'mail_date',
+                        name: 'mail_date'
                     },
                     {
-                        "data": "status",
-                        "render": function(data, type, row) {
-                            if (data == '0')
-                                return "<label class='badge badge-warning'>Wait</label>";
-                            else
-                                return "<label class='badge badge-success'>Created</label>";
-                        }
+                        data: 'mail_about',
+                        name: 'mail_about'
+                    },
+                    // {
+                    //     "data": "status",
+                    //     "render": function(data, type, row) {
+                    //         if (data == '0')
+                    //             return "<label class='badge badge-warning'>Belum Disetujui</label>";
+                    //         else
+                    //             return "<label class='badge badge-success'>Sudah Tersetujui</label>";
+                    //     }
+                    // },
+                    {
+                        "data": 'status_koreksi',
+                        'orderable': false,
+                        'searchable': false
                     },
                     {
                         "data": 'action',
