@@ -1,0 +1,48 @@
+- buat kelas (done)
+- lihat kelas (done)
+- generate kode (done)
+- edit kelas (done)
+- hapus kelas (done)
+
+- buat materi (teks, gambar) (done)
+- lihat materi (done)
+- edit materi (done)
+- hapus materi (done)
+- upload lampiran(done)
+- download lampiran (done)
+- edit lampiran (done)
+- hapus lampiran (done)
+
+- buat tugas (done)
+- lihat tugas (done)
+- edit tugas (done)
+- hapus tugas (done)
+- upload lampiran tugas (done)
+- download lampiran tugas (done)
+- edit lampiran tugas(done)
+- hapus lampiran tugas (done)
+- rekap nilai tugas semua kelompok
+
+INFORMASI
+- lihat kelompok dlm kelas (done)
+- lihat semua siswa (done)
+- menendang siswa (done)
+
+PENGATURAN AKUN
+upload foto profil
+logout
+
+PROGRESS SISWA
+INDEX
+- daftar nama siswa di kelompok (done)
+- rekap nilai tugas satu kelompok (done)
+- beri  nilai+komentar (done)
+
+DATA PIMPINAN
+- tabel konsep surat
+- ttd pimpinan
+- surat masuk
+- detail surat masuk
+
+DATA SEKRETARIS
+- 

@@ -22,10 +22,11 @@
     <!-- endinject -->
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{ asset('assets/css/demo_2/style.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/siswa.css') }}" />
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/css/guru.css') }}" />
+
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" />
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}" />
     @vite([])
     <style>
         table.user_datatable tbody td {
@@ -56,7 +57,7 @@
             <nav class="navbar top-navbar col-lg-12 col-12 p-0">
                 <div class="container">
                     <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                        <a class="navbar-brand brand-logo" href="index.html">
+                        <a class="navbar-brand brand-logo" href="{{ route('home') }}">
                             <img src="{{ asset('assets/images/logo.png') }}" alt="logo" style="height: auto" />
 
                         </a>
@@ -84,12 +85,12 @@
                                     <form action="{{ route('logout') }}" method="POST">
                                         @csrf
                                         <button type="submit" class="dropdown-item" ">
-                                        <i class="mdi mdi-logout mr-2 text-primary"></i> Signout </button></form>
+                                        <i class=" mdi mdi-logout mr-2 text-primary"></i> Signout </button>
+                                    </form>
                                 </div>
                             </li>
                         </ul>
-                        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
-                            data-toggle="horizontal-menu-toggle">
+                        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="horizontal-menu-toggle">
                             <span class="mdi mdi-menu"></span>
                         </button>
                     </div>
@@ -99,29 +100,12 @@
             @yield('navbar')
         </div>
         <!-- partial -->
-        <div class="container-fluid page-body-wrapper">
+        <div class="container-fluid page-body-wrapper" style="margin-bottom: 2rem">
             <div class="main-panel">
                 <div class="content-wrapper pb-0">
                     @yield('content')
                 </div>
-                <!-- partial:partials/_footer.html -->
-                <footer class="footer">
-                    <div class="container">
-                        <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright ©
-                                bootstrapdash.com 2020</span>
-                            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a
-                                    href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard
-                                    templates</a> from Bootstrapdash.com</span>
-                        </div>
 
-                        <div>
-                            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block"> Distributed
-                                By: <a href="https://themewagon.com/" target="_blank">Themewagon</a></span>
-                        </div>
-                    </div>
-                </footer>
-                <!-- partial -->
 
             </div>
             <!-- main-panel ends -->

@@ -1,0 +1,57 @@
+.card-basic {
+    background-size: cover;
+    background-image: linear-gradient(to right bottom, #0066ff, #2451d0, #283da3, #232b78, #1a1a51);
+    border-radius: 20px;
+}
+.card-link{
+    color: #3e4b5b;
+    padding: 2rem;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    background-color: #eaf0ff;
+}
+.icons{
+    width: 20px;
+}
+.vector{
+    margin: auto;
+    width: 50%;
+    text-align: center;
+}
+.big-input{
+    font-size: 17px;
+    border-radius: 10px;
+}
+.title-nav{
+    justify-content: center;
+    border-radius: 0px 0px 20px 20px;
+    background-color: #ffffff12;
+}
+.card-banner{
+    padding: 1rem;
+    border-color: #007bff;
+    border-style: dashed;
+    border-width: 1px;
+}
+.card-header{
+    background-color: #007bff;
+    color: white;
+    font-weight: 600;
+    border-radius: 0px 0px 30px 30px!important;
+    text-align: center;
+    font-size: 20px;
+}
+.container-scroller{
+    margin-bottom: 2rem!important;
+}
+label{
+    font-weight: 600;
+    font-size: 13px;
+}
+img{
+    max-width: 109%!important;
+}
+.table thead th {
+    font-weight: bold;
+}
