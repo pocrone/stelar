@@ -60,10 +60,13 @@ class LeaderInboxMailsContoller extends Controller
 
             if ($mail == 1) {
                 $mail_data = InboxMail::where('inbox_mails.id', $request->id)
+                    ->select('inbox_mails.*', 'inbox_mails.id as inboxID', 'classifications.*')
                     ->leftjoin('classifications', 'classifications.id', '=', 'inbox_mails.classification_id')->first();
                 $mail_data['status_disposition'] = 1;
             } else {
-                $mail_data = InboxMail::where('inbox_mails.id', $request->id)->leftjoin('classifications', 'classifications.id', '=', 'inbox_mails.classification_id')->first();
+                $mail_data = InboxMail::where('inbox_mails.id', $request->id)
+                    ->select('inbox_mails.*', 'inbox_mails.id as inboxID', 'classifications.*')
+                    ->leftjoin('classifications', 'classifications.id', '=', 'inbox_mails.classification_id')->first();
                 $mail_data['status_disposition'] = 0;
             }
 

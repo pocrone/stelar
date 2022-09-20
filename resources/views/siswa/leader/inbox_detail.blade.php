@@ -225,7 +225,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('leader_dispositon_add', $data->id) }}" method="post">
+                    <form action="{{ route('leader_dispositon_add', $data->inboxID) }}" method="post">
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Tujuan Disposisi</label>
@@ -241,7 +241,7 @@
                                 placeholder="Masukkan Instruksi Dispisisi Anda"></textarea>
                         </div>
 
-                        <input type="hidden" name="inbox_mail_id" value="{{ $data->id }}">
+                        <input type="hidden" name="inbox_mail_id" value="{{ $data->inboxID }}">
 
                 </div>
                 <div class="modal-footer">
@@ -265,7 +265,7 @@
                 "serverSide": true,
                 "processing": true,
                 "ajax": {
-                    "url": "{{ route('leader_dispositon', $data->id) }}",
+                    "url": "{{ route('leader_dispositon', $data->inboxID) }}",
                     "dataType": "json",
 
                 },

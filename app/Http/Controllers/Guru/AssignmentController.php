@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers\Guru;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Guru_AssignmentRequest;
-use App\Models\Assignments;
-use App\Models\GroupAssignments;
-use App\Models\Classroom;
-use App\Models\Group;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Storage;
+use App\Models\User;
+use App\Models\Group;
+use App\Models\Classroom;
+use App\Models\Assignments;
 use Illuminate\Http\Request;
+use App\Models\GroupAssignments;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
+use App\Http\Requests\Guru_AssignmentRequest;
 
 
 class AssignmentController extends Controller
@@ -32,6 +34,8 @@ class AssignmentController extends Controller
     public function insert(Guru_AssignmentRequest $request)
     {
         $id =  $request->input('classroom_id');
+
+        $class = User::find(Auth::id())->first();
 
         if ($request->file()) {
 

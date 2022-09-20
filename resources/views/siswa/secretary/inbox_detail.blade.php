@@ -42,7 +42,7 @@
                                             Download Surat
                                         </a>
                                         <hr>
-                                        <form action="{{ route('file_inbox', $data->id) }}" method="post"
+                                        <form action="{{ route('file_inbox', $data->inboxID) }}" method="post"
                                             enctype="multipart/form-data">
                                             @csrf
                                             <input type="file" name="file" id="">
@@ -59,7 +59,7 @@
                                             <i class="fa fa-file fa-4x pull-center text-info">
                                             </i>
                                         </button>
-                                        <form action="{{ route('file_inbox', $data->id) }}" method="post"
+                                        <form action="{{ route('file_inbox', $data->inboxID) }}" method="post"
                                             enctype="multipart/form-data">
                                             @csrf
                                             <input type="file" name="file" id="">
@@ -260,7 +260,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('secretary_dispositon_add', $data->id) }}" method="post">
+                    <form action="{{ route('secretary_dispositon_add', $data->inboxID) }}" method="post">
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Tujuan Disposisi</label>
@@ -276,7 +276,7 @@
                                 placeholder="Masukkan Instruksi Dispisisi Anda"></textarea>
                         </div>
 
-                        <input type="hidden" name="inbox_mail_id" value="{{ $data->id }}">
+                        <input type="hidden" name="inbox_mail_id" value="{{ $data->inboxID }}">
 
                 </div>
                 <div class="modal-footer">
@@ -300,7 +300,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('edit_inbox_secretary', $data->id) }}" method="post">
+                    <form action="{{ route('edit_inbox_secretary', $data->inboxID) }}" method="post">
                         {{ csrf_field() }}
                         <div class="form-group row">
                             <label for="inputPassword" class="col-sm-2 col-form-label">Nomor Surat</label>
@@ -370,7 +370,7 @@
                 "serverSide": true,
                 "processing": true,
                 "ajax": {
-                    "url": "{{ route('secretary_dispositon', $data->id) }}",
+                    "url": "{{ route('secretary_dispositon', $data->inboxID) }}",
                     "dataType": "json",
 
                 },

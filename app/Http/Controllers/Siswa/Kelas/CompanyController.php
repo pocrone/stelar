@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Siswa\Kelas;
 
-use DataTables;
+use Yajra\DataTables\Facades\DataTables;
 use App\Models\Group;
 use App\Models\UserGroup;
 use Illuminate\Http\Request;
@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CompanyRequest;
+use App\Models\User;
 
 class CompanyController extends Controller
 {
@@ -52,6 +53,7 @@ class CompanyController extends Controller
     public function dataCompany()
     {
 
+
         $data = UserGroup::select('groupname', DB::raw('count(*) as total'), 'name', 'LeaderGroupID', 'group_id')
             ->join('groups', 'groups.id', '=', 'user_groups.group_id')
             ->join('users', 'users.id', '=', 'groups.LeaderGroupID')
@@ -84,9 +86,11 @@ class CompanyController extends Controller
      */
     public function createCompany(CompanyRequest $request)
     {
+        $class = User::find(auth()->user()->id);
         $company = new Group();
         $company->groupname = $request->groupname;
         $company->LeaderGroupID = Auth::id();
+        $company->classroom_id = $class->classroom_id;
         $company->save();
         $id = DB::getPdo()->lastInsertId();
         $user_group = new UserGroup();

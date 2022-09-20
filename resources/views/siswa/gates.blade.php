@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="row">
-        @if ($classroom->id == null or $classroom->id == '')
+        @if (empty($classroom->id))
             <div class="col-md-12">
                 <div class="card w-100">
                     <div class="vector my-3">
@@ -35,8 +35,8 @@
                 <div class="card card-banner">
                     <span class="small">Kelas</span>
                     <span class="h1"> {{ $classroom->class_name }}</span>
-                    <span class="small">Pengajar</span>
-                    <span class="h1"> {{ $teacher }}</span>
+                    {{-- <span class="small">Pengajar</span> --}}
+                    {{-- <span class="h1"> {{ $teacher }}</span> --}}
                     <a href="{{ route('std_classdetail') }}" class="btn btn-danger btn-lg">Lihat
                         Kelas</a>
                 </div>
