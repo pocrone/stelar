@@ -75,6 +75,14 @@
                                     </button>
                                 </div>
                                 <div class="col-md-9">
+                                    @error('file')
+                                        <div class="alert alert-warning alert-block">
+                                            <button type="button" class="close" data-dismiss="alert">×</button>
+                                            <strong>{{ $errors->first() }}</strong>
+                                        </div>
+                                    @enderror
+
+
                                     <table class="table table-responsive">
                                         <tr>
                                             <td width=30%>No Surat</td>

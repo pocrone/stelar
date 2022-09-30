@@ -12,7 +12,7 @@
   ================================================== -->
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/favicon.ico') }}" />
 
     <!-- PLUGINS CSS STYLE -->
     <link rel="stylesheet" href="{{ asset('assets/landing-page/plugins/bootstrap/bootstrap.min.css') }}">
@@ -41,20 +41,28 @@
                         <!-- Content -->
                         <div class="content text-center">
                             <div class="logo mb-0">
-                                <a href="index.html"><img src="{{ asset('assets/landing-page/images/logos.png') }}"
+                                <a href="index.html"><img src="{{ asset('assets/images/logo.png') }}"
                                         style="width: 150px;" alt=""></a>
                             </div>
                             <div class="title-text">
-                                <h3>Masuk ARSIPEDIA</h3>
+                                <h3>Masuk Stelar</h3>
+                                @error('email')
+                                    <small><span class="text-danger">{{ $errors->first('email') }}</span></small>
+                                @enderror
+                                @error('password')
+                                    <small><span class="text-danger">{{ $errors->first('password') }}</span></small>
+                                @enderror
                             </div>
                             <form action="{{ route('login') }}" method="POST">
                                 @csrf
                                 <!-- Username -->
                                 <input class="form-control main" type="email" name='email' placeholder="E-mail"
                                     required>
+
                                 <!-- Password -->
                                 <input class="form-control main" type="password" name="password"
                                     placeholder="Kata Sandi" required>
+
                                 <!-- Submit Button -->
                                 <button class="btn btn-main-sm">Masuk</button>
                             </form>

@@ -12,26 +12,24 @@
   ================================================== -->
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/favicon.ico') }}" />
 
     <!-- PLUGINS CSS STYLE -->
-    < <link rel="stylesheet" href="{{ asset('assets/landing-page/plugins/bootstrap/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/landing-page/plugins/themify-icons/themify-icons.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/landing-page/plugins/slick/slick.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/landing-page/plugins/slick/slick-theme.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/landing-page/plugins/fancybox/jquery.fancybox.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/landing-page/plugins/aos/aos.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/landing-page/plugins/bootstrap/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/landing-page/plugins/themify-icons/themify-icons.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/landing-page/plugins/slick/slick.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/landing-page/plugins/slick/slick-theme.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/landing-page/plugins/fancybox/jquery.fancybox.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/landing-page/plugins/aos/aos.css') }}">
 
-        <!-- CUSTOM CSS -->
-        <link href="{{ asset('assets/landing-page/css/style.css') }}" rel="stylesheet">
+    <!-- CUSTOM CSS -->
+    <link href="{{ asset('assets/landing-page/css/style.css') }}" rel="stylesheet">
 
 </head>
 
 <body class="body-wrapper" data-spy="scroll" data-target=".privacy-nav">
 
-    <!--=============================
-=            Sign Up            =
-==============================-->
+
 
     <section class="user-login section">
         <div class="container">
@@ -46,36 +44,52 @@
                         <!-- Content -->
                         <div class="content text-center">
                             <div class="logo mb-0">
-                                <a href="index.html"><img src="{{ asset('assets/landing-page/images/logos.png') }}"
+                                <a href="index.html"><img src="{{ asset('assets/images/logo.png') }}"
                                         style="width: 150px;" alt=""></a>
                             </div>
                             <div class="title-text">
-                                <h3>Buat Akun ARSIPEDIA</h3>
+                                <h3>Buat Akun Stelar</h3>
+                                @error('email')
+                                    <small><span class="text-danger">{{ $errors->first() }}</span></small>
+                                @enderror
+                                @error('name')
+                                    <small><span class="text-danger">{{ $errors->first() }}</span></small>
+                                @enderror
+                                @error('password_confirmation')
+                                    <small><span class="text-danger">{{ $errors->first() }}</span></small>
+                                @enderror
+                                @error('password')
+                                    <small><span class="text-danger">{{ $errors->first() }}</span></small>
+                                @enderror
                             </div>
+
                             <form action="{{ route('register') }}" method="POST">
                                 @csrf
                                 <!-- Username -->
                                 <input class="form-control main" type="text" name="name"
                                     placeholder="Nama Lengkap" required>
+
                                 <!-- Email -->
                                 <input class="form-control main" type="email" name="email"
                                     placeholder="Alamat E-mail" required>
+
                                 <!-- Password -->
-                                <select name="role" id="" class="form-control main">
+                                <select name="role" id="" class="form-control main" required>
                                     <option value=""> --Daftar sebagai-- </option>
-                                    <option value="2"> Siswa </option>
-                                    <option value="1"> Guru </option>
+                                    <option value="2"> Peserta Didik </option>
+                                    <option value="1"> Pengajar </option>
                                 </select>
                                 <input class="form-control main" type="password" name='password' placeholder="Password"
                                     required>
                                 <input class="form-control main" type="password" name='password_confirmation'
                                     placeholder="Konfirmasi Password" required>
+
                                 <!-- Submit Button -->
                                 <button class="btn btn-main-md">daftar</button>
                             </form>
                             <div class="new-acount">
 
-                                <p>Sudah punya akun? <a href="sign-in.html">MASUK</a></p>
+                                <p>Sudah punya akun? <a href="{{ route('login') }}">MASUK</a></p>
                             </div>
                         </div>
                     </div>

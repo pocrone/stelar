@@ -24,9 +24,10 @@
     <link rel="stylesheet" href="{{ asset('assets/css/demo_2/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/siswa.css') }}" />
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}" />
-    @vite([])
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}" />
+
     <style>
         table.user_datatable tbody td {
             word-break: break-word;
@@ -45,6 +46,15 @@
             word-break: break-all;
             white-space: normal;
         }
+
+        td.details-control {
+            background: url('{{ URL::asset('assets/details_open.png') }}') no-repeat center center;
+            cursor: pointer;
+        }
+
+        tr.details td.details-control {
+            background: url('{{ URL::asset('assets/details_close.png') }}') no-repeat center center;
+        }
     </style>
 </head>
 
@@ -56,12 +66,12 @@
             <nav class="navbar top-navbar col-lg-12 col-12 p-0">
                 <div class="container">
                     <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                        <a class="navbar-brand brand-logo" href="index.html">
+                        <a class="navbar-brand brand-logo" href="{{ route('home') }}">
                             <img src="{{ asset('assets/images/logo.png') }}" alt="logo" style="height: auto" />
 
                         </a>
-                        <a class="navbar-brand brand-logo-mini" href="index.html"><img
-                                src="{{ asset('assets/images/logo-mini.svg') }}" alt="logo" /></a>
+                        <a class="navbar-brand brand-logo-mini" href="{{ route('home') }}"><img
+                                src="{{ asset('assets/images/favicon.ico') }}" alt="logo" /></a>
                     </div>
                     <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
 
@@ -70,7 +80,8 @@
                                 <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown"
                                     aria-expanded="false">
                                     <div class="nav-profile-img">
-                                        <img src="{{ asset('assets/images/faces/face1.jpg') }}" alt="image" />
+                                        <img src="{{ asset('storage/avatar/' . auth()->user()->avatar) }}"
+                                            alt="image" />
                                     </div>
                                     <div class="nav-profile-text">
                                         <p class="text-black font-weight-semibold m-0"> {{ $nama }} </p>
@@ -81,10 +92,13 @@
                                 <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
 
                                     <div class="dropdown-divider"></div>
+                                    <a href="{{ route('user_setting') }}" class="dropdown-item">
+                                        <i class="mdi mdi-account mr-2 text-primary"></i> Pengaturan Akun </a>
                                     <form action="{{ route('logout') }}" method="POST">
                                         @csrf
                                         <button type="submit" class="dropdown-item" ">
                                         <i class="mdi mdi-logout mr-2 text-primary"></i> Signout </button></form>
+
                                 </div>
                             </li>
                         </ul>
@@ -110,14 +124,11 @@
                         <div class="d-sm-flex justify-content-center justify-content-sm-between">
                             <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright ©
                                 bootstrapdash.com 2020</span>
-                            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a
-                                    href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard
-                                    templates</a> from Bootstrapdash.com</span>
+                            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Tim Pengembang PRODI S1 ADP UM
                         </div>
 
                         <div>
-                            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block"> Distributed
-                                By: <a href="https://themewagon.com/" target="_blank">Themewagon</a></span>
+                        
                         </div>
                     </div>
                 </footer>

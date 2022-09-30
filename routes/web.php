@@ -36,6 +36,7 @@ use App\Http\Controllers\Guru\ProgressController;
 use App\Http\Controllers\Guru\StudentsController;
 use App\Http\Controllers\Guru\LeaderController;
 use App\Http\Controllers\Guru\SecretaryController;
+use App\Http\Controllers\Siswa\Kelas\UserSettingController;
 use PhpParser\Builder\ClassConst;
 
 /*
@@ -49,12 +50,19 @@ use PhpParser\Builder\ClassConst;
 |
 */
 
+
 Route::get('/', function () {
     return view('index');
 });
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/account', [UserSettingController::class, 'index'])->name('user_setting');
+    Route::get('/kelola_password', [UserSettingController::class, 'editPassword'])->name('user_setting_password');
+    Route::post('/manage_password', [UserSettingController::class, 'managePassword'])->name('edit_setting_password');
+    Route::post('/edit_data_account', [UserSettingController::class, 'store'])->name('user_update_data');
+});
 Route::middleware(['auth', 'role:1'])->group(function () {
     Route::prefix('guru')->group(function () {
         //manage class
@@ -101,6 +109,8 @@ Route::middleware(['auth', 'role:1'])->group(function () {
         Route::get('/inbox_retensi/{group_id}', [LeaderController::class, 'inbox_retention'])->name('leader_inbox_retention');
         Route::get('/outbox_retensi/{group_id}', [LeaderController::class, 'outbox_retention'])->name('leader_outbox_retention');
         Route::get('/outbox_retensix/{group_id}', [LeaderController::class, 'outbox_retentionx'])->name('leader_outbox_retentionx');
+        Route::get('/koreksi_surat/{group_id}', [LeaderController::class, 'leader_mail_correct'])->name('leader_mail_correct');
+        Route::get('/detail_koreksi_surat/{id}/{group_id}', [LeaderController::class, 'viewMail'])->name('guru_leader_detail_outbox');
         //secretary data
         //Klasfikasi
         Route::get('/klasifikasi/{group_id}', [SecretaryController::class, 'classification'])->name('secretary_classification_progress');
@@ -108,13 +118,14 @@ Route::middleware(['auth', 'role:1'])->group(function () {
         //surat masuk
         Route::get('/secretary_inbox/{group_id}', [SecretaryController::class, 'inbox'])->name('inbox_secretary_progress');
         Route::get('/x/{group_id}', [SecretaryController::class, 'x'])->name('x');
-        Route::get('/inbox_detail/{id}/{group_id}', [SecretaryController::class, 'inbox_detail'])->name('inbox_detail_secretary');
+        Route::get('/inbox_detail/{id}/{group_id}', [SecretaryController::class, 'secretary_detail_inbox'])->name('inbox_detail_secretary');
         Route::get('/disposition_progress/{id}', [SecretaryController::class, 'disposition'])->name('secretary_dispositon_progress');
         //konsep surat
         Route::get('/konsep_surat/{group_id}', [SecretaryController::class, 'concept'])->name('data_concept_progress');
+        Route::get('/surat_keluar/{group_id}', [SecretaryController::class, 'outbox_data'])->name('sec_outbox_progress');
+        Route::get('/detail_surat_keluar/{id}/{group_id}', [SecretaryController::class, 'viewMail'])->name('sec_outbox_detail_progress');
         // Route::get('/lihat_surat/{id}/{group_id}', [SecretaryController::class, 'mail'])->name('mail');
-        Route::get('/detail_surat_keluar/{id}', [SecretaryOutbox::class, 'detailMail'])->name('creatdetailMaile_outbox');
-        Route::get('/export_pdf/{id}', [SecretaryOutbox::class, 'exportPDF'])->name('exportPDF');
+        Route::get('/export_pdf/{id}', [SecretaryController::class, 'exportPDF'])->name('exportPDF_teach');
 
         Route::get('/secretary_inbox_retensi/{group_id}', [SecretaryController::class, 'inbox_retention'])->name('inbox_retention_sec_progress');
         Route::get('/secretary_outbox_retensi/{group_id}', [SecretaryController::class, 'outbox_retention'])->name('outbox_retention_sec_progress');
@@ -125,6 +136,8 @@ Route::middleware(['auth', 'role:1'])->group(function () {
         Route::get('/disposition_archive/{id}', [ArchiveController::class, 'disposition'])->name('disposition_archive');
         Route::get('/inbox_retensi_archive/{group_id}', [ArchiveController::class, 'inbox_retensi_archive'])->name('inbox_retensi_archive');
         Route::get('/outbox_retensi_archive/{group_id}', [ArchiveController::class, 'outbox_retensi_archive'])->name('outbox_retensi_archive');
+        Route::get('/arsiparis_surat_keluar/{group_id}', [ArchiveController::class, 'outbox_data'])->name('arc_outbox_progress');
+        Route::get('/arsiparis_detail_surat_keluar/{id}/{group_id}', [ArchiveController::class, 'viewMail'])->name('arc_outbox_detail_progress');
     });
 });
 Route::middleware(['auth', 'role:2'])->group(function () {
@@ -150,6 +163,7 @@ Route::middleware(['auth', 'role:2'])->group(function () {
         Route::get('/joinCompany/{id}', [CompanyController::class, 'joinCompany'])->name('joinCompany');
         Route::post('exitCompany/{user_id}', [CompanyController::class, 'leaveGroup'])->name('exitCompany');
         Route::post('/deleteCompany/{group_id}', [CompanyController::class, 'deleteGroup'])->name('deleteCompany');
+
 
         //Pengelompokan Route pimpinan
         Route::prefix('pimpinan')->group(function () {
@@ -180,7 +194,7 @@ Route::middleware(['auth', 'role:2'])->group(function () {
         Route::prefix('sekretaris')->group(function () {
             Route::get('/dashboard', [SecretaryDashboard::class, 'index'])->name('secretary_dashboard');
             //Klasfikasi
-            Route::get('/klasifikasi', [SecretaryClassification::class, 'index'])->name('secretary_classification');
+
             Route::post('/tambah_klasifikasi',  [SecretaryClassification::class, 'store'])->name('add_classification');
             Route::post('/edit_concept/{id}',  [SecretaryClassification::class, 'edit'])->name('edit_classification');
             Route::post('delete_classification/{id}',  [SecretaryClassification::class, 'delete'])->name('delete_classification');
@@ -202,6 +216,9 @@ Route::middleware(['auth', 'role:2'])->group(function () {
             Route::get('/outbox', [SecretaryOutbox::class, 'index'])->name('outbox_data');
             Route::get('/buat_surat/{id}', [SecretaryOutbox::class, 'createOutbox'])->name('create_outbox');
             Route::post('/store_mail', [SecretaryOutbox::class, 'storeMail'])->name('store_mail');
+            Route::get('/edit_mail/{id}', [SecretaryOutbox::class, 'editOutbox'])->name('edit_mail');
+            Route::post('/update_mail/{id}', [SecretaryOutbox::class, 'updateOutbox'])->name('update_outbox');
+            Route::post('/delete_mail/{id}', [SecretaryOutbox::class, 'deleteOutbox'])->name('delete_outbox');
             Route::get('/lihat_surat/{id}', [SecretaryOutbox::class, 'viewMail'])->name('viewMail');
             Route::get('/detail_surat_keluar/{id}', [SecretaryOutbox::class, 'detailMail'])->name('creatdetailMaile_outbox');
             Route::get('/export_pdf/{id}', [SecretaryOutbox::class, 'exportPDF'])->name('exportPDF');
@@ -209,14 +226,13 @@ Route::middleware(['auth', 'role:2'])->group(function () {
             Route::get('/inbox_retensi', [SecretaryRetention::class, 'inbox_retention'])->name('inbox_retention_sec');
             Route::get('/outbox_retensi', [SecretaryRetention::class, 'outbox_retention'])->name('outbox_retention_sec');
 
-
             Route::get('pathtoimages/{var2}', [SecretaryOutbox::class, 'getAuthorizedImage'])->name('link_logo');
         });
 
         //Pengelompokan Route arsiparis
         Route::prefix('arsiparis')->group(function () {
             Route::get('/dashboard', [ArchivistDashboard::class, 'index'])->name('archivist_dashboard');
-
+            Route::get('/klasifikasi', [SecretaryClassification::class, 'index'])->name('secretary_classification');
             Route::get('/inbox', [ArchivistInbox::class, 'index'])->name('inbox_archivist');
             Route::post('/add_inbox', [ArchivistInbox::class, 'store'])->name('add_inbox_archivist');
             Route::post('/set_class/{id}', [ArchivistInbox::class, 'edit_classification'])->name('set_class_archivist');
@@ -234,9 +250,14 @@ Route::middleware(['auth', 'role:2'])->group(function () {
             Route::post('/set_class_outbox/{id}', [ArchivistOutbox::class, 'edit_classification'])->name('set_class_archivist_out');
             Route::post('/set_retention_outbox/{id}', [ArchivistOutbox::class, 'set_retention'])->name('set_retention_archivist_out');
             Route::post('/set_location_outbox/{id}', [ArchivistOutbox::class, 'set_location'])->name('set_location_archivist_out');
+            Route::get('/edit_mail/{id}', [ArchivistOutbox::class, 'editOutbox'])->name('arc_edit_mail');
+            Route::post('/update_mail/{id}', [ArchivistOutbox::class, 'updateOutbox'])->name('arc_update_outbox');
+            Route::post('/delete_mail/{id}', [ArchivistOutbox::class, 'deleteOutbox'])->name('arc_delete_outbox');
         });
     });
 });
+
+
 
 
 require __DIR__ . '/auth.php';

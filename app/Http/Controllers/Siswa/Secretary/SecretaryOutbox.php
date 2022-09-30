@@ -120,7 +120,7 @@ class SecretaryOutbox extends Controller
 
             if ($request->file()) {
                 $extension =  $request->file('logo')->extension();
-                $fileName = 'logo' . '_' . auth()->user()->name . '.' . $extension;
+                $fileName = 'logo' . '_' . time() . '.' . $extension;
                 $filePath = $request->file('logo')->storeAs('logo_outbox', $fileName, 'public');
 
                 $data = [
@@ -183,12 +183,15 @@ class SecretaryOutbox extends Controller
     public function viewMail(Request $request)
     {
         $koreksi_surat = MailCorrection::where('outbox_mail_id', $request->id)->get();
-        $autograph = Autograph::where('user_id', auth()->user()->id)->first();
+
         $cek_status = $this->getstatus_koreksi($request->id);
         $data = OutboxMail::where('outbox_mails.id', $request->id)
             ->leftjoin('classifications', 'classifications.id', '=', 'outbox_mails.classification_id')
-            ->select('outbox_mails.*', 'outbox_mails.id as outboxID')
-            ->first();;
+            ->select('outbox_mails.*', 'outbox_mails.id as outboxID', 'classifications.*')
+            ->first();
+        $autograph = Autograph::where('autographs.id', $data->autograph_id)
+            ->join('users', 'users.id', '=', 'autographs.user_id')
+            ->first();
         return view('siswa.secretary.view_mail')
             ->with('mail', $data)
             ->with('ttd', $autograph)
@@ -200,7 +203,7 @@ class SecretaryOutbox extends Controller
     public function upload_mail(Request $request)
     {
         $request->validate([
-            'file' => 'required|mimes:csv,txt,xlx,jpg,png|max:2048'
+            'file.*' => 'required|mimes:csv,txt,xlx,jpg,png|max:2048'
         ]);
 
         $fileModel =  InboxMail::find($request->id);
@@ -224,16 +227,146 @@ class SecretaryOutbox extends Controller
 
         $data = [
             'mail' => $mail,
-            'image' => asset('storage/logo_outbox/' . $mail->logo)
+
         ];
 
         // return $mail;
 
         // return view('siswa.secretary.export_outbox', $data);
 
-        $pdf = PDF::loadView('siswa.secretary.export_outbox', ['mail' => $mail, 'image' => asset('storage/logo_outbox/' . $mail->logo)]);
+        $pdf = PDF::loadView('siswa.secretary.export_outbox', ['mail' => $mail]);
         return $pdf->stream($data['mail']['outboxmail_number'] . '.pdf');
 
         // return $pdf->download($data['mail']['outboxmail_number'] . '.pdf');
+    }
+
+    public function editOutbox(Request $request)
+    {
+        $mail = OutboxMail::find($request->id);
+        $data = MailConcept::where('mail_concepts.id', $mail->mail_concept_id)
+            ->select('*', 'mail_concepts.id as conceptID')
+            ->join('users', 'users.id', '=', 'mail_concepts.user_id')
+            ->first();
+
+        return view('siswa.secretary.edit_outbox')
+            ->with('concept', $data)
+            ->with('mail', $mail)
+            ->with('nama', auth()->user()->name);
+    }
+
+    public function updateOutbox(Request $request)
+    {
+        $class = User::select('classroom_id')->where('id', Auth::id())->first();
+        $identity = UserGroup::select('group_id')->where('user_id', Auth::id())->first();
+
+        if (empty($request->logo)) {
+            $data = [
+                'main_institution' => $request->main_institution,
+                'name_institution' => $request->name_institution,
+                'phone_institution' => $request->phone_institution,
+                'email_institution' => $request->email_institution,
+                'address_institution' => $request->address_institution,
+
+
+                'outboxmail_number' => $request->outboxmail_number,
+                'mail_date' => $request->mail_date,
+                'attachment' => $request->attachment,
+                'mail_about' => $request->mail_about,
+
+                'mail_recevier' => $request->mail_recevier,
+                'mail_destination' => $request->mail_destination,
+                'city_destination' => $request->city_destination,
+
+
+                'preambule' => $request->preambule,
+                'mail_detail' => $request->mail_detail,
+                'closing_sentence' => $request->closing_sentence,
+
+                'mail_officer' => $request->mail_officer,
+                'officer' => $request->officer,
+                'notation' => $request->notation,
+                'identity_number' => $request->identity_number,
+
+                'date_create' => $request->date_create,
+                'file' => 'default.png',
+                'user_id' => auth()->user()->id,
+                'group_id' => $identity->group_id,
+                'date_create' => date('Y-m-d'),
+                'autograph_status' => 0,
+                'class_id' => $class->classroom_id,
+
+                'mail_concept_id' => $request->id_konsep
+            ];
+            $update = OutboxMail::where('id', $request->id)->update($data);
+
+
+            return redirect(route('viewMail', $request->id));
+        } else {
+
+            if ($request->file()) {
+                $extension =  $request->file('logo')->extension();
+                $fileName = 'logo' . '_' . time() . '.' . $extension;
+                $filePath = $request->file('logo')->storeAs('logo_outbox', $fileName, 'public');
+
+                $data = [
+                    'main_institution' => $request->main_institution,
+                    'name_institution' => $request->name_institution,
+                    'phone_institution' => $request->phone_institution,
+                    'email_institution' => $request->email_institution,
+                    'address_institution' => $request->address_institution,
+
+
+                    'outboxmail_number' => $request->outboxmail_number,
+                    'mail_date' => $request->mail_date,
+                    'attachment' => $request->attachment,
+                    'mail_about' => $request->mail_about,
+
+                    'mail_recevier' => $request->mail_recevier,
+                    'mail_destination' => $request->mail_destination,
+                    'city_destination' => $request->city_destination,
+
+
+                    'preambule' => $request->preambule,
+                    'mail_detail' => $request->mail_detail,
+                    'closing_sentence' => $request->closing_sentence,
+                    'identity_number' => $request->identity_number,
+
+                    'mail_officer' => $request->mail_officer,
+                    'officer' => $request->officer,
+                    'notation' => $request->notation,
+
+                    'date_create' => $request->date_create,
+                    'file' => 'default.png',
+                    'user_id' => auth()->user()->id,
+                    'group_id' => $identity->group_id,
+                    'date_create' => date('Y-m-d'),
+                    'autograph_status' => 0,
+                    'class_id' => $class->classroom_id,
+                    'logo' => $fileName,
+                    'mail_concept_id' => $request->id_konsep
+                ];
+
+                $update = OutboxMail::where('id', $request->id)->update($data);
+
+
+                return redirect(route('viewMail', $request->id));
+            }
+        }
+    }
+
+    public function deleteOutbox(Request $request)
+    {
+        $outbox = OutboxMail::find($request->id);
+        $mail_concept =  MailConcept::where('id', $outbox->mail_concept_id)->update(['status' => 0]);
+
+
+        if (!empty($outbox->logo)) {
+            Storage::delete('public/logo_outbox/' . $outbox->logo);
+        }
+        $delete = OutboxMail::where('id', $request->id)->delete();
+
+
+
+        return redirect(route('outbox_data'));
     }
 }

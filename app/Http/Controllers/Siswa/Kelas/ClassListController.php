@@ -56,7 +56,7 @@ class ClassListController extends Controller
                 'classroom_id' => $data['id']
             ];
             $query = User::where('id', auth()->user()->id)->update($update_data);
-            return redirect()->back();
+            return redirect('home');
         } else {
             return redirect('/siswa/daftar_kelas')
                 ->with('gagal', 'Kode kelas yang kamu tulis tidak ditemukan atau tidak ada');

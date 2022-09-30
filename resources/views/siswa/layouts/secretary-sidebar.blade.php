@@ -7,7 +7,7 @@
                     <span class="menu-title">Dashboard</span>
                 </a>
             </li>
-            <li class="nav-item ">
+            {{-- <li class="nav-item ">
                 <a href="{{ route('std_list_class') }}" class="nav-link">
                     <i class="mdi mdi-monitor-dashboard menu-icon"></i>
                     <span class="menu-title">Master Data</span>
@@ -20,10 +20,9 @@
                                 Surat</a>
                         </li>
 
-
                     </ul>
                 </div>
-            </li>
+            </li> --}}
             <li class="nav-item pr-3">
                 <a class="nav-link" href="{{ route('inbox_secretary') }}">
                     <i class="mdi mdi-compass-outline menu-icon"></i>
@@ -41,12 +40,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('data_concept') }}">Baca Konsep</a>
                         </li>
-                    </ul>
-                    <ul class="submenu-item">
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('outbox_data') }}">Daftar Surat Keluar</a>
                         </li>
                     </ul>
+
                 </div>
             </li>
 

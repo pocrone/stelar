@@ -68,9 +68,10 @@ class ArchivistInbox extends Controller
     public function inbox_detail(Request $request)
     {
 
-        $classification = Classification::select('*')->get();
+
 
         $user_group = UserGroup::select('group_id')->where('user_id', Auth::id())->first();
+        $classification = Classification::select('*')->where('group_id', $user_group->group_id)->get();
         $group_id =  InboxMail::where('inbox_mails.id', $request->id)->first();
         if ($group_id->group_id == $user_group->group_id) {
             $mail = InboxMail::where('inbox_mails.id', $request->id)
@@ -144,7 +145,7 @@ class ArchivistInbox extends Controller
     public function upload_mail(Request $request)
     {
         $request->validate([
-            'file' => 'required|mimes:csv,txt,xlx,jpg,png|max:2048'
+            'file.*' => 'required|mimes:csv,txt,xlx,jpg,png,doc,docx,pdf,jpeg,ppt,pptx|max:2048'
         ]);
         $fileModel = new InboxMail;
         if ($request->file()) {

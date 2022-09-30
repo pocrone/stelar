@@ -17,7 +17,7 @@
 
                 <div class="col-12 table">
                     <table class="table table-bordered user_datatable wrap" style="width: 100%;">
-                        <thead>
+                        <thead class="bg-primary text-white">
                             <tr>
                                 <th>No</th>
                                 <th>Nama</th>

@@ -73,9 +73,15 @@ class MailCorrectionController extends Controller
     public function viewMail(Request $request)
     {
         $koreksi_surat = MailCorrection::where('outbox_mail_id', $request->id)->get();
-        $autograph = Autograph::where('user_id', auth()->user()->id)->first();
+
         $cek_status = $this->getstatus_koreksi($request->id);
-        $data = Outboxmail::where('id', $request->id)->first();
+        $data = OutboxMail::where('outbox_mails.id', $request->id)
+            ->leftjoin('classifications', 'classifications.id', '=', 'outbox_mails.classification_id')
+            ->select('outbox_mails.*', 'outbox_mails.id as outboxID', 'classifications.*')
+            ->first();
+        $autograph = Autograph::where('autographs.id', $data->autograph_id)
+            ->join('users', 'users.id', '=', 'autographs.user_id')
+            ->first();
         return view('siswa.leader.view_mail')
             ->with('mail', $data)
             ->with('ttd', $autograph)
@@ -115,10 +121,18 @@ class MailCorrectionController extends Controller
 
     public function approveAutograph(Request $request)
     {
-        $data = ['autograph_status' => 1];
-        $update  = OutboxMail::where('id', $request->id)->update($data);
 
-        return redirect()->back();
+        $outbox_data = OutboxMail::where('id', $request->id)->first();
+        $sign_id =  Autograph::where('user_id', auth()->user()->id)->first();
+        $check_sign = Autograph::where('user_id', auth()->user()->id)->exists();
+        if ($check_sign == true) {
+            $data = ['autograph_status' => 1, 'autograph_id' => $sign_id->id];
+            $update  = OutboxMail::where('id', $request->id)->update($data);
+
+            return redirect()->back();
+        } else {
+            return back()->with('gagal', 'Kamu belum menginputkan TTD Kamu');
+        }
     }
 
     /**

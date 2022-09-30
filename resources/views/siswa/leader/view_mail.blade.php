@@ -94,7 +94,8 @@
                             Setujui dan Beri TTD Surat
                         </a>
                     @else
-                        <p> Sudah Disetujui</p>
+                        <p> Sudah Disetujui Oleh :</p>
+                        <p>Pimpinan - {{ $ttd->name }}</p>
                     @endif
                 </div>
             </div>
@@ -110,17 +111,7 @@
                     @endif
                 </div>
             </div>
-            <div class="card">
-                <div class="card-body">
-                    <label class='badge badge-secondary'>Status TTD Surat</label>
-                    <hr>
-                    @if ($mail->autograph_status == 1)
-                        <p>Sudah TTD</p>
-                    @else
-                        <p>Belum Disetujui</p>
-                    @endif
-                </div>
-            </div>
+
             <div class="card">
                 <div class="card-body">
                     <label class='badge badge-secondary'>Lampiran Surat</label>
@@ -164,6 +155,13 @@
         <div class="col-md-8">
             <a href="{{ route('exportPDF', $mail->id) }}" target="_blank" class="btn btn-primary btn-sm mb-3">Cetak
                 Surat</a>
+
+            @if ($message = Session::get('gagal'))
+                <div class="alert alert-warning alert-block">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>{{ $message }}</strong>
+                </div>
+            @endif
             <div class="card">
                 <div class="card-body">
 
@@ -174,6 +172,8 @@
                                 <td width="205px"> <img width="100px"
                                         src="{{ asset('storage/logo_outbox/' . $mail->logo) }}" alt="">
                                 </td>
+                            @else
+                                <td width="205px"> </td>
                             @endif
                             <td>
                                 <table>
@@ -332,7 +332,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Disposisi Surat</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Riwayat Koreksi Surat</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

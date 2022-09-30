@@ -160,8 +160,10 @@
                                                     {{ 'Ditinjau Kembali' }}
                                                 @elseif ($data->status_retention == 2)
                                                     {{ 'Permanen' }}
-                                                @else
+                                                @elseif ($data->status_retention == 3)
                                                     {{ 'Musnah' }}
+                                                @else
+                                                    {{ 'Belum Diatur' }}
                                                 @endif
                                             </td>
                                         </tr>

@@ -19,7 +19,14 @@
                     </div>
                     <div class="col">
                         <div class="card-block px-2 py-4">
-                            <h1 class="card-title">25</h1>
+                            <h1 class="card-title">
+                                @if (!empty($data['concept_total']['total']))
+                                    {{ $data['concept_total']['total'] }}
+                                @else
+                                    0
+                                @endif
+
+                            </h1>
                             <hr>
                             <p class="card-text">Konsep Surat</p>
 
@@ -37,7 +44,13 @@
                     </div>
                     <div class="col">
                         <div class="carixzzZxsdzvccxzxz321`121`11`112321`d-block px-2 py-4">
-                            <h1 class="card-title">33</h1>
+                            <h1 class="card-title">
+                                @if (!empty($data['mail_correct']['total']))
+                                    {{ $data['mail_correct']['total'] }}
+                                @else
+                                    0
+                                @endif
+                            </h1>
                             <hr>
                             <p class="card-text">Surat Keluar Belum Terkoreksi</p>
 
@@ -55,7 +68,13 @@
                     </div>
                     <div class="col">
                         <div class="card-block px-2 py-4">
-                            <h1 class="card-title">47</h1>
+                            <h1 class="card-title">
+                                @if (!empty($data['autograph']['total']))
+                                    {{ $data['autograph']['total'] }}
+                                @else
+                                    0
+                                @endif
+                            </h1>
                             <hr>
                             <p class="card-text">Surat Keluar Belum TTD</p>
 

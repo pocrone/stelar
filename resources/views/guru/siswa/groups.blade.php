@@ -1,6 +1,6 @@
 @extends('guru.layouts.master')
 
-@section('title', 'Data Siswa')
+@section('title', 'Data Peserta Didik')
 
 @section('navbar')
     @include('guru.layouts.gate-sidebar')

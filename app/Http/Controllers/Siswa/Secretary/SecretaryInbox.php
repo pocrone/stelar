@@ -99,23 +99,59 @@ class SecretaryInbox extends Controller
 
     public function store(Request $request)
     {
-        $user_group = UserGroup::select('group_id')->where('user_id', Auth::id())->first();
-        $inbox = new InboxMail();
-        $inbox->mail_number = $request->mail_number;
-        $inbox->date = date("Y-m-d", strtotime($request->date));
-        $inbox->time = date('H:i');
-        $inbox->sender = $request->sender;
-        $inbox->mail_attribute = $request->mail_attribute;
-        $inbox->mail_about = $request->mail_about;
-        $inbox->mail_summary = $request->mail_summary;
-        $inbox->classroom_id = auth()->user()->classroom_id;
-        $inbox->status = '1';
-        $inbox->group_id = $user_group->group_id;
-        $inbox->user_id = auth()->user()->id;;
-        // $inbox->status = '1';
 
-        $inbox->save();
-        return redirect()->back();
+        if (empty($request->file)) {
+            $user_group = UserGroup::select('group_id')->where('user_id', Auth::id())->first();
+            $inbox = new InboxMail();
+            $inbox->mail_number = $request->mail_number;
+            $inbox->date = date("Y-m-d", strtotime($request->date));
+            $inbox->time = date('H:i');
+            $inbox->sender = $request->sender;
+            $inbox->mail_attribute = $request->mail_attribute;
+            $inbox->mail_about = $request->mail_about;
+            $inbox->mail_summary = $request->mail_summary;
+            $inbox->classroom_id = auth()->user()->classroom_id;
+            $inbox->status = '1';
+            $inbox->group_id = $user_group->group_id;
+            $inbox->user_id = auth()->user()->id;;
+            // $inbox->status = '1';
+
+            $inbox->save();
+            return redirect()->back();
+        } else {
+            $request->validate([
+                'file.*' => 'required|mimes:csv,txt,xlx,jpg,png,doc,docx,pdf,jpeg,ppt,pptx|max:2048'
+            ]);
+
+            $fileModel =  InboxMail::find($request->id);
+            if ($request->file()) {
+                $extension =  $request->file('file')->extension();
+                $fileName = 'inbox' . '_' . time() . '.' . $extension;
+                $filePath = $request->file('file')->storeAs('inbox', $fileName, 'public');
+
+                $user_group = UserGroup::select('group_id')->where('user_id', Auth::id())->first();
+                $inbox = new InboxMail();
+                $inbox->mail_number = $request->mail_number;
+                $inbox->date = date("Y-m-d", strtotime($request->date));
+                $inbox->time = date('H:i');
+                $inbox->sender = $request->sender;
+                $inbox->mail_attribute = $request->mail_attribute;
+                $inbox->mail_about = $request->mail_about;
+                $inbox->mail_summary = $request->mail_summary;
+                $inbox->classroom_id = auth()->user()->classroom_id;
+                $inbox->status = '1';
+                $inbox->group_id = $user_group->group_id;
+                $inbox->user_id = auth()->user()->id;
+                $inbox->file = $fileName;
+                // $inbox->status = '1';
+
+                $inbox->save();
+
+                return back()
+                    ->with('success', 'File has been uploaded.')
+                    ->with('autograph', $fileName);
+            }
+        }
     }
     public function edit(Request $request)
     {
@@ -136,12 +172,12 @@ class SecretaryInbox extends Controller
     public function upload_mail(Request $request)
     {
         $request->validate([
-            'file' => 'required|mimes:csv,txt,xlx,jpg,png|max:2048'
+            'file.*' => 'required|max:2048|mimes:csv,txt,xlx,jpg,png,doc,docx,pdf,jpeg,ppt,pptx',
         ]);
 
         $fileModel =  InboxMail::find($request->id);
         if ($request->file()) {
-            $extension =  $request->file('file')->extension();
+            $extension =  $request->file('file')->getClientOriginalExtension();
             $fileName = 'inbox' . '_' . time() . '.' . $extension;
             $filePath = $request->file('file')->storeAs('inbox', $fileName, 'public');
 

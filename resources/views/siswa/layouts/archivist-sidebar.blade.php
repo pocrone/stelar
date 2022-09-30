@@ -23,6 +23,10 @@
                             <a class="nav-link" href="{{ route('outbox_data_arc') }}">Surat Keluar
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('secretary_classification') }}">Buat Klasifikasi
+                                Surat</a>
+                        </li>
 
 
                     </ul>

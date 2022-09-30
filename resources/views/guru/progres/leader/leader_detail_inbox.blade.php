@@ -1,6 +1,6 @@
-@extends('siswa.layouts.master')
+@extends('guru.layouts.master')
 
-@section('title', 'Pimpinan - Detail Surat Masuk')
+@section('title', 'Pimpinan | Surat Masuk')
 
 @section('navbar')
     @include('guru.layouts.progress-sidebar')
@@ -27,19 +27,31 @@
                             aria-labelledby="pills-home-tab">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <center>
-                                        <h3>Preview</h3>
-                                    </center>
-                                    <a href="{{ asset('storage/inbox/' . $data->file) }}" target="_blank"
-                                        class="btn btn-lg bg-light btn-block ">
-                                        <i class="fa fa-file fa-4x pull-center text-info">
-                                        </i>
-                                    </a>
-                                    <a href="{{ asset('storage/inbox/' . $data->file) }}" download
-                                        class=" btn-sm
-                                        bg-primary text-center text-white mt-2 btn-block ">
-                                        Download Surat
-                                    </a>
+
+                                    @if (!empty($data->file))
+                                        <center>
+                                            <h3>Preview</h3>
+                                        </center>
+                                        <a href="{{ asset('storage/inbox/' . $data->file) }}" target="_blank"
+                                            class="btn btn-lg bg-light btn-block ">
+                                            <i class="fa fa-file fa-4x pull-center text-info">
+                                            </i>
+                                        </a>
+                                        <a href="{{ asset('storage/inbox/' . $data->file) }}" download
+                                            class=" btn-sm
+                                    bg-primary text-center text-white mt-2 btn-block ">
+                                            Download Surat
+                                        </a>
+                                        <hr>
+                                    @else
+                                        <center>
+                                            <h4>File Belum Diupload</h4>
+                                        </center>
+                                        <button disabled class="btn btn-lg bg-light btn-block ">
+                                            <i class="fa fa-file fa-4x pull-center text-info">
+                                            </i>
+                                        </button>
+                                    @endif
                                 </div>
                                 <div class="col-md-9">
                                     <table class="table table-responsive">
@@ -106,7 +118,8 @@
                                             <div class="card-header">
                                                 <div class="row">
                                                     <div class="col-12">
-                                                        <i class="ti-email fa-lg text-primary "></i> <strong> No. Surat :
+                                                        <i class="ti-email fa-lg text-primary "></i> <strong> No. Surat
+                                                            :
                                                             {{ $data->mail_number }}</strong>
 
 
@@ -179,6 +192,7 @@
 
                                                     </table>
 
+
                                                 </div>
 
                                             </div>
@@ -194,6 +208,45 @@
         </div>
     </div>
 
+    <div class="modal fade" id="disposisi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+        aria-hidden="true">
+
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Disposisi Surat</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('leader_dispositon_add', $data->inboxID) }}" method="post">
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Tujuan Disposisi</label>
+                            <select class="form-control" id="exampleFormControlSelect1" name="recevier" required>
+                                <option value="">Pilih Tujuan Disposisi ... </option>
+                                <option value="Sekretaris">Sekretaris</option>
+                                <option value="Arsiparis">Arsiparis</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Instruksi Dipsosisi</label>
+                            <textarea class="form-control" id="text_disposisi" name='instruction'
+                                placeholder="Masukkan Instruksi Dispisisi Anda"></textarea>
+                        </div>
+
+                        <input type="hidden" name="inbox_mail_id" value="{{ $data->inboxID }}">
+
+                </div>
+                <div class="modal-footer">
+
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
@@ -207,8 +260,7 @@
                 "serverSide": true,
                 "processing": true,
                 "ajax": {
-                    "url": '{!! route('leader_dispositon_progress', ['id' => $data->id, 'group_id' => $group_id]) !!}',
-                    ,
+                    "url": "{{ route('leader_dispositon_progress', ['id' => $data->inboxID, 'group_id' => $data->groupID]) }}",
                     "dataType": "json",
 
                 },

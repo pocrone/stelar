@@ -11,12 +11,19 @@
     <div class="container">
         <button data-toggle="modal" data-target="#addInbox" class="btn btn-primary btn-md mb-2">Buat Surat Masuk
         </button>
+
         <div class="card">
             <div class="card-body">
+                @error('file')
+                    <div class="alert alert-warning alert-block">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>{{ $errors->first() }}</strong>
+                    </div>
+                @enderror
                 <div class="row">
                     <div class="col-12 table">
                         <table class="table table-bordered inbox_datatable" style="width: 100%;">
-                            <thead>
+                            <thead class="bg-primary text-white">
                                 <tr>
                                     <th>No</th>
                                     <th>Editor</th>
@@ -52,20 +59,20 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('add_inbox_secretary') }}" method="post">
+                    <form action="{{ route('add_inbox_secretary') }}" method="post" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="form-group row">
                             <label for="inputPassword" class="col-sm-2 col-form-label">Nomor Surat</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="inp_klasifikasi"
-                                    placeholder="Masukkan Nomor Surat" name='mail_number'>
+                                    placeholder="Masukkan Nomor Surat" name='mail_number' required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputPassword" class="col-sm-2 col-form-label">Tanggal Surat</label>
                             <div class="col-sm-10">
                                 <input type="date" class="form-control" id="inp_sub_klasifikasi" placeholder="yyyy-mm-dd"
-                                    name='date'>
+                                    name='date' required>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -84,21 +91,28 @@
                             <label for="inputPassword" class="col-sm-2 col-form-label">Perihal Surat</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="inp_sub_klasifikasi"
-                                    placeholder="Masukkan Perihal Surat" name='mail_about'>
+                                    placeholder="Masukkan Perihal Surat" name='mail_about' required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputPassword" class="col-sm-2 col-form-label">Pengirim </label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="inp_sub_klasifikasi"
-                                    placeholder="Masukkan Pengirim" name='sender'>
+                                    placeholder="Masukkan Pengirim" name='sender' required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Tanggal Surat</label>
+                            <div class="col-sm-10">
+                                <input type="file" class="form-control" id="inp_sub_klasifikasi" placeholder="yyyy-mm-dd"
+                                    name='file'>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputPassword" class="col-sm-2 col-form-label">Isi Ringkas Surat</label>
                             <div class="col-sm-10">
                                 <textarea class="form-control" id="inp_sub_klasifikasi" placeholder="Masukkan isi ringkas surat" height='200'
-                                    name='mail_summary'></textarea>
+                                    name='mail_summary' required></textarea>
                             </div>
                         </div>
 

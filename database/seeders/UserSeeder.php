@@ -28,6 +28,7 @@ class UserSeeder extends Seeder
                 'email' => $faker->unique()->name . '@test.com',
                 'password' => bcrypt('password'),
                 'role' => '2',
+                'avatar' => 'default.jpg',
                 'classroom_id' => $faker->randomElement($classroom_id)
             ]);
         }

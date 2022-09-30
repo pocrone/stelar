@@ -12,6 +12,8 @@
 
             <div class="card">
                 <div class="card-body">
+                    <label class='badge badge-secondary'>Informasi Konsep Surat</label>
+                    <hr>
                     <p>Pimpinan : {{ $concept->name }}</p>
                     <p>Isi Konsep:</p>
                     <p>{{ $concept->mail_concept }}</p>
@@ -67,7 +69,7 @@
                                     <div class="form-group">
                                         <label for="" class="control-label">Logo Instansi</label>
                                         <div>
-                                            <input type="file" name="logo" class="form-control" required>
+                                            <input type="file" name="logo" class="form-control">
                                         </div>
                                     </div>
                                     <div class="form-group">

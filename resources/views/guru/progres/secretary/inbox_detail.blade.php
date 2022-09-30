@@ -1,6 +1,6 @@
 @extends('guru.layouts.master')
 
-@section('title', 'Sekretaris - Detail Surat Masuk')
+@section('title', 'Sekretaris | Detail Surat Masuk')
 
 @section('navbar')
     @include('guru.layouts.progress-sidebar')
@@ -27,7 +27,8 @@
                             aria-labelledby="pills-home-tab">
                             <div class="row">
                                 <div class="col-md-3">
-                                    @if ($data->file != null)
+
+                                    @if (!empty($data->file))
                                         <center>
                                             <h3>Preview</h3>
                                         </center>
@@ -38,7 +39,7 @@
                                         </a>
                                         <a href="{{ asset('storage/inbox/' . $data->file) }}" download
                                             class=" btn-sm
-                                        bg-primary text-center text-white mt-2 btn-block ">
+                                    bg-primary text-center text-white mt-2 btn-block ">
                                             Download Surat
                                         </a>
                                         <hr>
@@ -50,16 +51,7 @@
                                             <i class="fa fa-file fa-4x pull-center text-info">
                                             </i>
                                         </button>
-                                        <form action="#" method="post">
-                                            @csrf
-                                            <input type="file" name="file" id="">
-                                            <button type="submit"
-                                                class="btn btn-sm bg-primary text-center text-white mt-2 btn-block ">
-                                                Upload File
-                                            </button>
-                                        </form>
                                     @endif
-
                                 </div>
                                 <div class="col-md-9">
                                     <table class="table table-responsive">
@@ -126,11 +118,12 @@
                                             <div class="card-header">
                                                 <div class="row">
                                                     <div class="col-12">
-                                                        <i class="ti-email fa-lg text-primary "></i> <strong> No. Surat :
+                                                        <i class="ti-email fa-lg text-primary "></i> <strong> No. Surat
+                                                            :
                                                             {{ $data->mail_number }}</strong>
 
 
-                                                        @if ($data->disposition_status == 0)
+                                                        @if ($data->status_disposition == 0)
                                                             <button disabled="disabled"
                                                                 class="float-right ml-4 btn btn-xs btn-success">Status :
                                                                 Masih
@@ -144,8 +137,6 @@
                                                         @endif
 
                                                     </div>
-
-
                                                 </div>
 
                                             </div>
@@ -186,7 +177,7 @@
                                                 </div>
 
                                                 <div class="table-responsive-sm">
-                                                    <table class="table table-bordered dispos_datatable"
+                                                    <table class="table table-bordered dispo_datatable"
                                                         style="width: 100%;">
                                                         <thead>
                                                             <tr>
@@ -200,6 +191,7 @@
                                                         </thead>
 
                                                     </table>
+
 
                                                 </div>
 
@@ -216,16 +208,59 @@
         </div>
     </div>
 
+    <div class="modal fade" id="disposisi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+        aria-hidden="true">
+
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Disposisi Surat</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('leader_dispositon_add', $data->inboxID) }}" method="post">
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Tujuan Disposisi</label>
+                            <select class="form-control" id="exampleFormControlSelect1" name="recevier" required>
+                                <option value="">Pilih Tujuan Disposisi ... </option>
+                                <option value="Sekretaris">Sekretaris</option>
+                                <option value="Arsiparis">Arsiparis</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Instruksi Dipsosisi</label>
+                            <textarea class="form-control" id="text_disposisi" name='instruction'
+                                placeholder="Masukkan Instruksi Dispisisi Anda"></textarea>
+                        </div>
+
+                        <input type="hidden" name="inbox_mail_id" value="{{ $data->inboxID }}">
+
+                </div>
+                <div class="modal-footer">
+
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
 @endsection
 
 @section('customjs')
     <script>
         $(document).ready(function() {
-            var table = $('.dispos_datatable').DataTable({
+            var table = $('.dispo_datatable').DataTable({
                 "serverSide": true,
                 "processing": true,
                 "ajax": {
-                    "url": "{{ route('secretary_dispositon_progress', $data->id) }}",
+                    "url": "{{ route('leader_dispositon_progress', ['id' => $data->inboxID, 'group_id' => $data->groupID]) }}",
                     "dataType": "json",
 
                 },
@@ -233,6 +268,7 @@
                         "data": null,
                         "searchable": false,
                         "orderable": false,
+
                         "targets": 0,
                     },
                     {
@@ -261,7 +297,8 @@
                 table.column(0, {
                     search: 'applied',
                     order: 'applied',
-                    page: 'applied'
+                    page: 'applied',
+
                 }).nodes().each(function(cell, i) {
                     cell.innerHTML = i + 1 + info.start;
                 });

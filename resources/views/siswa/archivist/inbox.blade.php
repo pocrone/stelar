@@ -9,8 +9,7 @@
 @section('content')
 
     <div class="container">
-        <button data-toggle="modal" data-target="#addInbox" class="btn btn-primary btn-md mb-2">Buat Surat Masuk
-        </button>
+
         <div class="card">
             <div class="card-body">
                 <div class="row">

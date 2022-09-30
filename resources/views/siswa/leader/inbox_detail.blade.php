@@ -27,19 +27,30 @@
                             aria-labelledby="pills-home-tab">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <center>
-                                        <h3>Preview</h3>
-                                    </center>
-                                    <a href="{{ asset('storage/inbox/' . $data->file) }}" target="_blank"
-                                        class="btn btn-lg bg-light btn-block ">
-                                        <i class="fa fa-file fa-4x pull-center text-info">
-                                        </i>
-                                    </a>
-                                    <a href="{{ asset('storage/inbox/' . $data->file) }}" download
-                                        class=" btn-sm
-                                        bg-primary text-center text-white mt-2 btn-block ">
-                                        Download Surat
-                                    </a>
+                                    @if (!empty($data->file))
+                                        <center>
+                                            <h3>Preview</h3>
+                                        </center>
+                                        <a href="{{ asset('storage/inbox/' . $data->file) }}" target="_blank"
+                                            class="btn btn-lg bg-light btn-block ">
+                                            <i class="fa fa-file fa-4x pull-center text-info">
+                                            </i>
+                                        </a>
+                                        <a href="{{ asset('storage/inbox/' . $data->file) }}" download
+                                            class=" btn-sm
+                                    bg-primary text-center text-white mt-2 btn-block ">
+                                            Download Surat
+                                        </a>
+                                        <hr>
+                                    @else
+                                        <center>
+                                            <h4>File Belum Diupload</h4>
+                                        </center>
+                                        <button disabled class="btn btn-lg bg-light btn-block ">
+                                            <i class="fa fa-file fa-4x pull-center text-info">
+                                            </i>
+                                        </button>
+                                    @endif
                                 </div>
                                 <div class="col-md-9">
                                     <table class="table table-responsive">

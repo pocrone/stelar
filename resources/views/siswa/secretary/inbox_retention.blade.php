@@ -1,6 +1,6 @@
 @extends('siswa.layouts.master')
 
-@section('title', 'Pimpinan | Retensi Surat Masuk')
+@section('title', 'Sekretaris | Retensi Surat Masuk')
 
 @section('navbar')
     @include('siswa.layouts.secretary-sidebar')
@@ -15,7 +15,7 @@
                         <table class="table table-bordered inbox_retention" style="width: 100%;">
                             <thead>
                                 <tr>
-                                    <th class="bg-light">#</th>
+                                    <th>#</th>
                                     <th>No</th>
                                     <th>Nomor Surat</th>
                                     <th>Tanggal</th>
@@ -46,9 +46,21 @@
                 return 'Permanen';
             else if (d == 3)
                 return 'Musnah';
+            else
+                return 'Belum Diatur';
         }
 
         function format(d) {
+            if (d.class == null)
+                d.class = "Belum Diatur";
+            if (d.sub_class == null)
+                d.sub_class = "Belum Diatur";
+            if (d.mail_location == null)
+                d.mail_location = "Belum Diatur";
+            if (d.active_year == null)
+                d.active_year = "Belum Diatur";
+            if (d.inactive_year == null)
+                d.inactive_year = "Belum Diatur";
             return (
                 'Klasifikasi : ' +
                 d.class +
@@ -83,7 +95,7 @@
 
                 "columns": [{
 
-                        class: 'details-control btn-secondary',
+                        class: 'details-control',
                         orderable: false,
                         data: null,
                         defaultContent: ''

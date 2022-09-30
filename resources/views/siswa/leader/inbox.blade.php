@@ -10,31 +10,32 @@
     <div class="container">
 
         <div class="row">
-            <div class="card p-4">
-                <h4 class="card-title card-header d-flex justify-content-between align-items-center">
-                    Data Surat Masuk </h4>
-                <div class="col-12 table table-responsive">
-                    <table class="table table-bordered inbox_datatable table-striped" style="width: 100%;">
-                        <thead class="bg-primary text-white">
-                            <tr>
-                                <th>No</th>
-                                <th>Editor</th>
-                                <th>Nomor Surat</th>
-                                <th>Sifat Surat</th>
-                                <th>Detail Surat</th>
-                                <th>Pengirim</th>
-                                <th>Status</th>
-                                <th>Action</th>
+            <div class="card col-md-12">
+                <div class="card-body">
+                    <h4 class="card-title card-header d-flex justify-content-between align-items-center">
+                        Data Surat Masuk </h4>
+                    <div class="col-12 table table-responsive">
+                        <table class="table table-bordered inbox_datatable table-striped" style="width: 100%;">
+                            <thead class="bg-primary text-white">
+                                <tr>
+                                    <th>No</th>
+                                    <th>Editor</th>
+                                    <th>Nomor Surat</th>
+                                    <th>Sifat Surat</th>
+                                    <th>Detail Surat</th>
+                                    <th>Pengirim</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
 
-                            </tr>
+                                </tr>
 
-                        </thead>
-                        <tbody>
+                            </thead>
+                            <tbody>
 
-                        </tbody>
+                            </tbody>
 
-                    </table>
-
+                        </table>
+                    </div>
                 </div>
             </div>
 

@@ -30,13 +30,13 @@ class SecretaryClassification extends Controller
 
             return Datatables::of($data)->addIndexColumn()
                 ->addColumn('action', function ($data) {
-                    $btn = '<div class="row">' .
-                        '<button data-toggle="modal"  onclick="getclick_2(' . $data->id . ')"  data-target="#editKlasifikasi"  id="edit_button" class=" btn-primary p-0">
+                    $btn = '<div class="row mx-auto">' .
+                        '<button data-toggle="modal"  onclick="getclick_2(' . $data->id . ')"data-target="#editKlasifikasi" id="edit_button" class=" btn btn-primary p-0">
                     <i class="mdi mdi-lead-pencil icon-sm"></i></button>' .
 
                         '<form action="' . route("delete_classification", $data->id) . '" method="post">' .
                         @csrf_field() . '
-            <button type="submit"    class="  btn-danger btn-sm">
+            <button type="submit"   class="  btn-danger btn-sm p-0">
             <i class="mdi mdi-delete icon-sm"></button></form>' .
                         '</div>';
 

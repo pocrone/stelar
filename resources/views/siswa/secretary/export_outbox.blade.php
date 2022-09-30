@@ -78,39 +78,45 @@
 
                             <tr>
                                 @if (!empty($mail->logo))
-                                    <td width="205px"> <img width="100px" {{-- src="{{ public_path('storage/logo_outbox/' . $mail->logo) }}" alt=""></td> --}} @endif
-                                    <td>
-                                        <table class="text-center">
-
-                                            <tr>
-                                                <td class="text-center" style="text-align: center">
-                                                    <h3 style="margin:0px;margin:auto">
-                                                        <?= $mail->main_institution ?>
-                                                    </h3>
-                                                </td>
-
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center bold" style="text-align: center">
-                                                    <h2 style="margin:0px">
-                                                        <?= $mail->name_institution ?></h2>
-                                                </td>
-
-                                            </tr>
-                                            <tr>
-                                                <td class=" text-center "style="text-align: center">
-                                                    <?= $mail->address_institution ?>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center small" style="text-align: center"> Telp :
-                                                    <?= $mail->phone_institution ?> | Email :
-                                                    <?= $mail->email_institution ?>
-                                                </td>
-                                            </tr>
-
-                                        </table>
+                                    <td width="205px">
+                                        {{-- <img width="100px" 
+                                        src="{{ public_path('storage/logo_outbox/' . $mail->logo) }}" alt=""> --}}
                                     </td>
+                                @else
+                                    <td width="205px"> </td>
+                                @endif
+                                <td>
+                                    <table class="text-center">
+
+                                        <tr>
+                                            <td class="text-center" style="text-align: center">
+                                                <h3 style="margin:0px;margin:auto">
+                                                    <?= $mail->main_institution ?>
+                                                </h3>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center bold" style="text-align: center">
+                                                <h2 style="margin:0px">
+                                                    <?= $mail->name_institution ?></h2>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td class=" text-center "style="text-align: center">
+                                                <?= $mail->address_institution ?>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center small" style="text-align: center"> Telp :
+                                                <?= $mail->phone_institution ?> | Email :
+                                                <?= $mail->email_institution ?>
+                                            </td>
+                                        </tr>
+
+                                    </table>
+                                </td>
 
                             </tr>
                         </table>

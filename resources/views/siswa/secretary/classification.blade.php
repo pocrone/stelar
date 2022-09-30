@@ -1,29 +1,35 @@
 @extends('siswa.layouts.master')
 
-@section('title', 'Sekretaris | Klasifikasi Surat')
+@section('title', 'Arsiparis | Klasifikasi Surat')
 
 @section('navbar')
-    @include('siswa.layouts.secretary-sidebar')
+    @include('siswa.layouts.archivist-sidebar')
 @stop
 
 @section('content')
     <div class="container">
         <button data-toggle="modal" data-target="#addKlasifikasi" class="btn btn-info btn-md mb-2">Buat Klasifikasi
             Surat</button>
-        <div class="row">
-            <div class="col-12 table">
-                <table class="table table-sm table-bordered klasifikasi_datatable" style="width: 100%;">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th> Klasifkasi</th>
-                            <th>Sub Klasifkasi </th>
-                            <th>Action</th>
-                        </tr>
+        <div class="card">
+            <div class="card-body">
 
-                    </thead>
+                <div class="row">
+                    <div class="col-12 table">
+                        <table class="table table-sm table-bordered klasifikasi_datatable" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th> Klasifkasi</th>
+                                    <th>Sub Klasifkasi </th>
+                                    <th>Action</th>
+                                </tr>
 
-                </table>
+                            </thead>
+
+                        </table>
+
+                    </div>
+                </div>
 
             </div>
         </div>

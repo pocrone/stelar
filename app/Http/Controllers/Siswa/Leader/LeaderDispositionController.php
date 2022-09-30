@@ -24,7 +24,7 @@ class LeaderDispositionController extends Controller
         $group_id = UserGroup::select('group_id')->where('user_id', Auth::id())->first();
         $data = Disposition::select('dispositions.sender as sender_dispo', 'recevier', 'instruction', 'dispositions.date as date_dispo')
             ->join('inbox_mails', 'inbox_mails.id', '=', 'inbox_mail_id')
-            ->where('group_id', $group_id->group_id)
+            // ->where('group_id', $group_id->group_id)
             ->where('inbox_mail_id', $request->id)
             ->get(); # code...
 

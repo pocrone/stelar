@@ -1,6 +1,6 @@
 @extends('siswa.layouts.master')
 
-@section('title', 'Dashboard Siswa')
+@section('title', 'Dashboard Peserta Didik')
 
 @section('navbar')
     @include('siswa.layouts.gate-sidebar')
@@ -112,7 +112,7 @@
                                 </p>
 
                             </div>
-                            <a href="{{ route('secretary_dashboard') }}"
+                            <a href="{{ route('archivist_dashboard') }}"
                                 class='btn btn-primary btn-sm btn-block mt-2'>Masuk</a>
                         </div>
                     </div>

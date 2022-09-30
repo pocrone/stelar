@@ -51,6 +51,16 @@
         }
 
         function format(d) {
+            if (d.class == null)
+                d.class = "Belum Diatur";
+            if (d.sub_class == null)
+                d.sub_class = "Belum Diatur";
+            if (d.mail_location == null)
+                d.mail_location = "Belum Diatur";
+            if (d.active_year == null)
+                d.active_year = "Belum Diatur";
+            if (d.inactive_year == null)
+                d.inactive_year = "Belum Diatur";
             return (
                 'Klasifikasi : ' +
                 d.class +

@@ -43,6 +43,11 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link"
+                                href="{{ route('leader_mail_correct', ['group_id' => $group_id]) }}">Koreksi
+                                Surat Keluar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
                                 href="{{ route('leader_inbox_retention', ['group_id' => $group_id]) }}">Retensi
                                 Surat
                                 Masuk</a>
@@ -64,10 +69,7 @@
                 </a>
                 <div class="submenu">
                     <ul class="submenu-item">
-                        <li class="nav-item">
-                            <a class="nav-link"
-                                href="{{ route('secretary_classification_progress', ['group_id' => $group_id]) }}">Klasifikasi</a>
-                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link"
                                 href="{{ route('data_concept_progress', ['group_id' => $group_id]) }}">Konsep
@@ -79,7 +81,8 @@
                                 Masuk</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('leader_inbox', ['group_id' => $group_id]) }}">Surat
+                            <a class="nav-link"
+                                href="{{ route('sec_outbox_progress', ['group_id' => $group_id]) }}">Surat
                                 Keluar</a>
                         </li>
                         <li class="nav-item">
@@ -108,8 +111,17 @@
                     <ul class="submenu-item">
                         <li class="nav-item">
                             <a class="nav-link"
+                                href="{{ route('secretary_classification_progress', ['group_id' => $group_id]) }}">Klasifikasi</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
                                 href="{{ route('inbox_archive_progress', ['group_id' => $group_id]) }}">Surat
                                 Masuk</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                                href="{{ route('arc_outbox_progress', ['group_id' => $group_id]) }}">Surat
+                                Keluar</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link"

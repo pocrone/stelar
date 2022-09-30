@@ -45,9 +45,21 @@
                 return 'Permanen';
             else if (d == 2)
                 return 'Musnah';
+            else
+                return 'Belum Diatur';
         }
 
         function format(d) {
+            if (d.class == null)
+                d.class = "Belum Diatur";
+            if (d.sub_class == null)
+                d.sub_class = "Belum Diatur";
+            if (d.save_location == null)
+                d.save_location = "Belum Diatur";
+            if (d.active_year == null)
+                d.active_year = "Belum Diatur";
+            if (d.inactive_year == null)
+                d.inactive_year = "Belum Diatur";
             return (
                 'Klasifikasi : ' +
                 d.class +
@@ -55,7 +67,7 @@
                 d.sub_class +
                 '<hr>' +
                 'Lokasi Penyimpanan : ' +
-                d.mail_location +
+                d.save_location +
                 '<hr>' +
                 'Tahun Aktif : ' +
 

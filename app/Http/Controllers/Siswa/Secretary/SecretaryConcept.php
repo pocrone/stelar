@@ -25,7 +25,7 @@ class SecretaryConcept extends Controller
             $group_id = UserGroup::select('group_id')->where('user_id', Auth::id())->first();
             $data = MailConcept::select('mail_concepts.user_id', 'name', 'mail_concept', 'status', 'mail_concepts.id as conceptID')
                 ->join('users', 'users.id', '=', 'mail_concepts.user_id')
-                // ->join('classrooms', 'classrooms.id', '=', 'users.classroom_id')
+                // // ->join('classrooms', 'classrooms.id', '=', 'users.classroom_id')
                 ->where('group_id', $group_id->group_id)
                 // ->where('classrooms.id', auth()->user()->classroom_id)
                 ->get();
@@ -47,8 +47,9 @@ class SecretaryConcept extends Controller
                 })
                 ->rawColumns(['action'])
                 ->make(true);
-            return $data;
+            // return $data;
         }
+
         return view('siswa.secretary.concept')->with('nama', auth()->user()->name);
     }
 

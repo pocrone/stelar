@@ -19,7 +19,7 @@
             <li class="nav-item pr-5">
                 <a class="nav-link" href="{{ route('students', ['classroom_id' => $id]) }}">
                     <i class="mdi mdi-compass-outline menu-icon"></i>
-                    <span class="menu-title">Data Siswa</span>
+                    <span class="menu-title">Data Peserta Didik</span>
                 </a>
             </li>
             <li class="nav-item pr-5">

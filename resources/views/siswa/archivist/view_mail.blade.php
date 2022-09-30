@@ -82,18 +82,7 @@
 
                 </div>
             </div>
-            <div class="card">
-                <div class="card-body">
-                    <label class='badge badge-secondary'>Status TTD</label>
 
-                    <hr>
-                    @if ($mail->autograph_status == 0)
-                        <p> Belum Disetujui </p>
-                    @else
-                        <p> Sudah Disetujui</p>
-                    @endif
-                </div>
-            </div>
             <div class="card">
                 <div class="card-body">
                     <label class='badge badge-secondary'>Klasifikasi</label>
@@ -115,7 +104,8 @@
                     <label class='badge badge-secondary'>Status TTD Surat</label>
                     <hr>
                     @if ($mail->autograph_status == 1)
-                        <p>Sudah TTD</p>
+                        <p>Sudah TTD oleh :</p>
+                        <p>Pimpinan - {{ $ttd->name }}</p>
                     @else
                         <p>Belum Disetujui</p>
                     @endif
@@ -125,7 +115,7 @@
                 <div class="card-body">
                     <label class='badge badge-secondary'>Lampiran Surat</label>
                     <hr>
-                    @if (!empty($mail->file))
+                    @if ($mail->file != 'default.png')
                         <center>
                             <h3>Preview</h3>
                         </center>
@@ -225,8 +215,17 @@
         </div>
 
         <div class="col-md-8">
-            <a href="{{ route('exportPDF', $mail->outboxID) }}" target="_blank" class="btn btn-primary btn-sm mb-3">Cetak
-                Surat</a>
+            <form action="{{ route('arc_delete_outbox', $mail->outboxID) }}" method="POST">
+                @csrf
+                <a href="{{ route('exportPDF', $mail->outboxID) }}" target="_blank"
+                    class="btn btn-primary btn-sm mb-3 mr-3">Cetak
+                    Surat</a>
+                <a href="{{ route('arc_edit_mail', $mail->outboxID) }}" class="btn btn-success btn-sm mb-3 mr-3">Edit
+                    Surat</a>
+
+                <button type="submit" class="btn btn-danger btn-sm mb-3 mr-3">Delete Surat</button>
+            </form>
+
             <div class="card">
                 <div class="card-body">
 
@@ -237,6 +236,8 @@
                                 <td width="205px"> <img width="100px"
                                         src="{{ asset('storage/logo_outbox/' . $mail->logo) }}" alt="">
                                 </td>
+                            @else
+                                <td width="205px"> </td>
                             @endif
                             <td>
                                 <table>
@@ -393,7 +394,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Disposisi Surat</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Riwayat Koreksi Surat</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
