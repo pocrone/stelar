@@ -110,17 +110,51 @@
             <div class="shape" data-aos="fade-down-left" data-aos-duration="500" data-aos-delay="0"></div>
         </div>
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6 order-2 order-md-1 text-center text-md-left">
-                    <h1 class="text-white font-weight-bold mb-4">Sistem Praktikum Kearsipan</h1>
-                    <p class="text-white mb-5">Website pembelajaran untuk memfasilitasi kegiatan praktikum kearsipan
-                        yang dikembangkan oleh Prodi S1 Pendidikan Administrasi Perkantoran Universitas Negeri Malang
-                    </p>
-                    <a href="{{ route('login') }}" class="btn btn-main-md bg-white text-dark">Masuk</a>
+            <div class="col-md-12 order-2 order-md-1 text-center text-md-left align-items-center">
+
+                <h1 class="text-center text-white">Daftar Pengembang</h1>
+                <hr>
+            </div>
+            <div class="row align-items-center text-center">
+                <div class="col-lg-3">
+                    <div class="card" class="align-items-center text-center">
+                        <img class="card-img-top" src="{{ asset('assets/andi_basuki.jpg') }}" alt="Card image cap">
+                        <div class="card-body">
+                            <h6 class="font-weight-bold">Ketua</h6>
+                            <small class="card-text">Andi Basuki, S.Pd., M.Pd
+                            </small>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6 text-center order-1 order-md-2">
-                    <img class="img-fluid" src="{{ asset('assets/landing-page/images/Envelope-rafiki.svg') }}"
-                        alt="screenshot">
+                <div class="col-lg-3">
+                    <div class="card" ">
+                        <img class="card-img-top" src="{{ asset('assets/Madzi.png') }}" alt="Card image cap" >
+                        <div class="card-body">
+                            <h6 class="font-weight-bold">Anggota</h6>
+                            <small class="card-text">Dr. Madziatul Churiyah, S.Pd., M.M
+                                </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card" ">
+                        <img class="card-img-top" src="{{ asset('assets/buyung.png') }}" alt="Card image cap">
+                        <div class="card-body">
+                            <h6 class="font-weight-bold">Anggota</h6>
+                            <small class="card-text">Buyung Adi Dharma, S.AP., M.AP
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card" ">
+                        <img class="card-img-top" src="{{ asset('assets/dewi.jpg') }}" alt="Card image cap" >
+                        <div class="card-body">
+                            <h6 class="font-weight-bold">Anggota</h6>
+                            <small class="card-text">
+                                Dewi Ayu Sakdiyyah, S.Pd., M.Pd</small>
+                        </div>
+                    </div>
                 </div>
             </div>
 

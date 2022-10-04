@@ -111,7 +111,7 @@ class SecretaryInbox extends Controller
             $inbox->mail_about = $request->mail_about;
             $inbox->mail_summary = $request->mail_summary;
             $inbox->classroom_id = auth()->user()->classroom_id;
-            $inbox->status = '1';
+            $inbox->status = '0';
             $inbox->group_id = $user_group->group_id;
             $inbox->user_id = auth()->user()->id;;
             // $inbox->status = '1';
@@ -139,7 +139,7 @@ class SecretaryInbox extends Controller
                 $inbox->mail_about = $request->mail_about;
                 $inbox->mail_summary = $request->mail_summary;
                 $inbox->classroom_id = auth()->user()->classroom_id;
-                $inbox->status = '1';
+                $inbox->status = '0';
                 $inbox->group_id = $user_group->group_id;
                 $inbox->user_id = auth()->user()->id;
                 $inbox->file = $fileName;

@@ -50,7 +50,10 @@
         margin-bottom: 0px;
         padding-left: 0px;
         padding-inline-start: 0px;
+        list-style-position: inside;
+
     }
+
 
     ul>li {
         list-style-position: inside;

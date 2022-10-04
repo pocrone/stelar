@@ -36,14 +36,15 @@
                                         <div>
                                             <input type="text" name="main_institution" class="form-control"
                                                 value="{{ $mail->main_institution }}"
-                                                placeholder="contoh : DINAS PENDIDIKAN DAN KEBUDAYAAN">
+                                                placeholder="contoh : DINAS PENDIDIKAN DAN KEBUDAYAAN" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="" class="control-label">Nama Instansi</label>
                                         <div>
                                             <input type="text" name="name_institution" class="form-control"
-                                                value="{{ $mail->name_institution }}" placeholder="SMK SEBELAS MARET">
+                                                value="{{ $mail->name_institution }}" placeholder="SMK SEBELAS MARET"
+                                                required>
                                         </div>
                                     </div>
 
@@ -51,7 +52,7 @@
                                         <label for="" class="control-label">Alamat Instansi</label>
                                         <div class="">
                                             <textarea type="text" name="address_institution" class="form-control" value=""
-                                                placeholder="Jalan Soekarno-Hatta No.18 Kota Malang">{{ $mail->address_institution }} </textarea>
+                                                placeholder="Jalan Soekarno-Hatta No.18 Kota Malang" required>{{ $mail->address_institution }} </textarea>
                                         </div>
                                     </div>
 
@@ -63,8 +64,8 @@
                                             HP</label>
                                         <div>
                                             <input type="text" name="phone_institution" class="form-control"
-                                                value="{{ $mail->phone_institution }}"
-                                                placeholder="contoh: (031) 47189xxx ">
+                                                value="{{ $mail->phone_institution }}" placeholder="contoh: (031) 47189xxx "
+                                                required>
                                         </div>
                                     </div>
 
@@ -79,7 +80,7 @@
                                         <div>
                                             <input type="email" name="email_institution" class="form-control"
                                                 value="{{ $mail->email_institution }}"
-                                                placeholder="contoh : emaildinas@email.com">
+                                                placeholder="contoh : emaildinas@email.com" required>
                                         </div>
                                     </div>
                                 </div>
@@ -103,8 +104,8 @@
                                             Surat</label>
                                         <div>
                                             <input type="text" name="outboxmail_number" class="form-control"
-                                                value="{{ $mail->outboxmail_number }}"
-                                                placeholder="contoh: 187/AM/IX/2015">
+                                                value="{{ $mail->outboxmail_number }}" placeholder="contoh: 187/AM/IX/2015"
+                                                required>
                                         </div>
                                     </div>
                                 </div>
@@ -113,14 +114,15 @@
                                         <label for="" class="control-label">Perihal</label>
                                         <div>
                                             <input type="text" name="mail_about" class="form-control"
-                                                value="{{ $mail->mail_about }}" placeholder="contoh: Pemberitahuan">
+                                                value="{{ $mail->mail_about }}" placeholder="contoh: Pemberitahuan"
+                                                required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="" class="control-label">Lampiran</label>
                                         <div>
                                             <input type="text" name="attachment" class="form-control"
-                                                value="{{ $mail->attachment }}" placeholder="-">
+                                                value="{{ $mail->attachment }}" placeholder="-" required>
                                         </div>
                                     </div>
                                 </div>
@@ -134,8 +136,8 @@
                                 <div>
                                     <div class="">
                                         <input type="text" placeholder="contoh: Yth. Bapak/Ibu Guru"
-                                            name="mail_recevier" class="form-control"
-                                            value="{{ $mail->mail_recevier }}">
+                                            name="mail_recevier" class="form-control" value="{{ $mail->mail_recevier }}"
+                                            required>
                                     </div>
                                 </div>
                             </div>
@@ -147,7 +149,7 @@
                                         <div>
                                             <input type="text" name="mail_destination" class="form-control"
                                                 value="{{ $mail->mail_destination }}"
-                                                placeholder="contoh: SMK Sebelas Maret">
+                                                placeholder="contoh: SMK Sebelas Maret" required>
                                         </div>
                                     </div>
 
@@ -157,7 +159,8 @@
                                         <label for="" class="control-label">Kota Instansi Tujuan</label>
                                         <div>
                                             <input type="text" name=" city_destination" class="form-control"
-                                                value="{{ $mail->city_destination }}" placeholder="contoh: Kebumen">
+                                                value="{{ $mail->city_destination }}" placeholder="contoh: Kebumen"
+                                                required>
                                         </div>
                                     </div>
                                 </div>
@@ -172,7 +175,7 @@
                                         Pembuka</label>
                                     <div>
                                         <input type="text" name="preambule" class="form-control"
-                                            value="{{ $mail->preambule }}" placeholder="contoh: Dengan Hormat">
+                                            value="{{ $mail->preambule }}" placeholder="contoh: Dengan Hormat" required>
                                     </div>
                                 </div>
                             </div>
@@ -180,7 +183,7 @@
                                 <div class="form-group">
                                     <label for="" class="control-label">Isi Surat</label>
                                     <div>
-                                        <textarea name="mail_detail" id='outbox_mail' class="form-control outbox_mail">{!! $mail->mail_detail !!}</textarea>
+                                        <textarea name="mail_detail" id='outbox_mail' class="form-control outbox_mail" required>{!! $mail->mail_detail !!}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -190,7 +193,8 @@
                                         Penutup</label>
                                     <div>
                                         <input type="text" name="closing_sentence" class="form-control"
-                                            value="{{ $mail->closing_sentence }}" placeholder="contoh: Hormat Kami">
+                                            value="{{ $mail->closing_sentence }}" placeholder="contoh: Hormat Kami"
+                                            required>
                                     </div>
                                 </div>
                             </div>
@@ -202,7 +206,7 @@
                                         <div>
                                             <input type="text" name="mail_officer"
                                                 placeholder="contoh: Indah Setyorini" value="{{ $mail->mail_officer }}"
-                                                class="form-control">
+                                                class="form-control" required>
                                         </div>
                                     </div>
                                 </div>
@@ -211,7 +215,7 @@
                                         <label for="" class="control-label">Jabatan</label>
                                         <div>
                                             <input type="text" name="officer" placeholder="contoh: Kepala Sekolah"
-                                                value="{{ $mail->officer }}" class="form-control">
+                                                value="{{ $mail->officer }}" class="form-control" required>
                                             <!-- <input type="hidden" name="tipe" value="Hanging" class="form-control"> -->
                                         </div>
                                     </div>
@@ -224,7 +228,7 @@
                                         <div>
                                             <input type="text" name="identity_number"
                                                 placeholder="contoh: NIP 160412607066 200 1" class="form-control"
-                                                value="{{ $mail->identity_number }}">
+                                                value="{{ $mail->identity_number }}" required>
                                             <!-- <input type="hidden" name="tipe" value="Hanging" class="form-control"> -->
                                         </div>
                                     </div>
@@ -233,7 +237,7 @@
                                     <div class="form-group">
                                         <label for="" class="control-label">Tembusan</label>
                                         <div>
-                                            <textarea name="notation" id='outbox_mail' class="form-control outbox_mail">{!! $mail->notation !!}</textarea>
+                                            <textarea name="notation" id='outbox_mail' class="form-control outbox_mail" required>{!! $mail->notation !!}</textarea>
                                         </div>
                                     </div>
                                 </div>

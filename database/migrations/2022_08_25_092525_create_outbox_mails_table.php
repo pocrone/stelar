@@ -48,8 +48,8 @@ return new class extends Migration
 
             $table->date('date_create');
             $table->tinyInteger('autograph_status');
-            $table->integer('autograph_id')->nullable()->unsigned();
-            $table->foreign('autograph_id')->references('id')->on('autographs');
+            $table->bigInteger('autograph_id')->nullable()->unsigned();
+            // $table->foreign('autograph_id')->references('id')->on('autographs');
             $table->integer('class_id');
             $table->string('save_location')->nullable();
             $table->smallInteger('retention_status')->nullable();

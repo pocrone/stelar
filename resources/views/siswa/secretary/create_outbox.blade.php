@@ -35,14 +35,15 @@
                                             Instansi</label>
                                         <div>
                                             <input type="text" name="main_institution" class="form-control"
-                                                value="" placeholder="contoh : DINAS PENDIDIKAN DAN KEBUDAYAAN">
+                                                value="" placeholder="contoh : DINAS PENDIDIKAN DAN KEBUDAYAAN"
+                                                required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="" class="control-label">Nama Instansi</label>
                                         <div>
                                             <input type="text" name="name_institution" class="form-control"
-                                                value="" placeholder="SMK SEBELAS MARET">
+                                                value="" placeholder="SMK SEBELAS MARET" required>
                                         </div>
                                     </div>
 
@@ -50,7 +51,7 @@
                                         <label for="" class="control-label">Alamat Instansi</label>
                                         <div class="">
                                             <textarea type="text" name="address_institution" class="form-control" value=""
-                                                placeholder="Jalan Soekarno-Hatta No.18 Kota Malang"> </textarea>
+                                                placeholder="Jalan Soekarno-Hatta No.18 Kota Malang" required> </textarea>
                                         </div>
                                     </div>
 
@@ -62,7 +63,7 @@
                                             HP</label>
                                         <div>
                                             <input type="text" name="phone_institution" class="form-control"
-                                                value="" placeholder="contoh: (031) 47189xxx ">
+                                                value="" placeholder="contoh: (031) 47189xxx " required>
                                         </div>
                                     </div>
 
@@ -76,7 +77,7 @@
                                         <label for="" class="control-label">Email</label>
                                         <div>
                                             <input type="email" name="email_institution" class="form-control"
-                                                value="" placeholder="contoh : emaildinas@email.com">
+                                                value="" placeholder="contoh : emaildinas@email.com" required>
                                         </div>
                                     </div>
                                 </div>
@@ -99,7 +100,7 @@
                                             Surat</label>
                                         <div>
                                             <input type="text" name="outboxmail_number" class="form-control"
-                                                value="" placeholder="contoh: 187/AM/IX/2015">
+                                                value="" placeholder="contoh: 187/AM/IX/2015" required>
                                         </div>
                                     </div>
                                 </div>
@@ -108,14 +109,14 @@
                                         <label for="" class="control-label">Perihal</label>
                                         <div>
                                             <input type="text" name="mail_about" class="form-control" value=""
-                                                placeholder="contoh: Pemberitahuan">
+                                                placeholder="contoh: Pemberitahuan" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="" class="control-label">Lampiran</label>
                                         <div>
                                             <input type="text" name="attachment" class="form-control" value=""
-                                                placeholder="-">
+                                                placeholder="-" required>
                                         </div>
                                     </div>
                                 </div>
@@ -129,7 +130,7 @@
                                 <div>
                                     <div class="">
                                         <input type="text" placeholder="contoh: Yth. Bapak/Ibu Guru"
-                                            name="mail_recevier" class="form-control">
+                                            name="mail_recevier" class="form-control" required>
                                     </div>
                                 </div>
                             </div>
@@ -140,7 +141,7 @@
                                             Instansi Tujuan</label>
                                         <div>
                                             <input type="text" name="mail_destination" class="form-control"
-                                                value="" placeholder="contoh: SMK Sebelas Maret">
+                                                value="" placeholder="contoh: SMK Sebelas Maret" required>
                                         </div>
                                     </div>
 
@@ -150,7 +151,7 @@
                                         <label for="" class="control-label">Kota Instansi Tujuan</label>
                                         <div>
                                             <input type="text" name=" city_destination" class="form-control"
-                                                value="" placeholder="contoh: Kebumen">
+                                                value="" placeholder="contoh: Kebumen" required>
                                         </div>
                                     </div>
                                 </div>
@@ -165,7 +166,7 @@
                                         Pembuka</label>
                                     <div>
                                         <input type="text" name="preambule" class="form-control" value=""
-                                            placeholder="contoh: Dengan Hormat">
+                                            placeholder="contoh: Dengan Hormat" required>
                                     </div>
                                 </div>
                             </div>
@@ -173,7 +174,7 @@
                                 <div class="form-group">
                                     <label for="" class="control-label">Isi Surat</label>
                                     <div>
-                                        <textarea name="mail_detail" id='outbox_mail' class="form-control outbox_mail"></textarea>
+                                        <textarea name="mail_detail" id='outbox_mail' class="form-control outbox_mail" required></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -183,7 +184,7 @@
                                         Penutup</label>
                                     <div>
                                         <input type="text" name="closing_sentence" class="form-control"
-                                            value="" placeholder="contoh: Hormat Kami">
+                                            value="" placeholder="contoh: Hormat Kami" required>
                                     </div>
                                 </div>
                             </div>
@@ -194,7 +195,7 @@
                                         <label for="" class="control-label">Atas Nama</label>
                                         <div>
                                             <input type="text" name="mail_officer"
-                                                placeholder="contoh: Indah Setyorini" class="form-control">
+                                                placeholder="contoh: Indah Setyorini" class="form-control" required>
                                         </div>
                                     </div>
                                 </div>
@@ -203,7 +204,7 @@
                                         <label for="" class="control-label">Jabatan</label>
                                         <div>
                                             <input type="text" name="officer" placeholder="contoh: Kepala Sekolah"
-                                                class="form-control">
+                                                class="form-control" required>
                                             <!-- <input type="hidden" name="tipe" value="Hanging" class="form-control"> -->
                                         </div>
                                     </div>

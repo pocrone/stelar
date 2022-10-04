@@ -53,8 +53,12 @@ use PhpParser\Builder\ClassConst;
 
 Route::get('/', function () {
     return view('index');
-});
+})->name('landing_page');
 
+
+Route::get('/pengembang', function () {
+    return view('about-us');
+})->name('pengembang');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth'])->group(function () {

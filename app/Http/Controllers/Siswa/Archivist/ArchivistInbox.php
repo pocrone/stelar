@@ -68,8 +68,6 @@ class ArchivistInbox extends Controller
     public function inbox_detail(Request $request)
     {
 
-
-
         $user_group = UserGroup::select('group_id')->where('user_id', Auth::id())->first();
         $classification = Classification::select('*')->where('group_id', $user_group->group_id)->get();
         $group_id =  InboxMail::where('inbox_mails.id', $request->id)->first();
@@ -170,7 +168,8 @@ class ArchivistInbox extends Controller
     public function edit_classification(Request $request)
     {
         $data = [
-            'classification_id' => $request->class
+            'classification_id' => $request->class,
+            'status' => 1
         ];
         $update = InboxMail::where('id', $request->id)->update($data);
         return redirect()->back();

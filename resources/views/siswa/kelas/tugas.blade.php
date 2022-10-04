@@ -38,7 +38,15 @@
                             </td>
 
                             <td class="col-6">
-                                <h6>199</h6>
+                                <h6>
+                                    @if (!empty($score->value))
+                                        {{ $score->value }}
+                                    @else
+                                        <span class="text-danger">Belum Dinilai</span>
+                                    @endif
+                                </h6>
+
+
                             </td>
                         </tr>
                         <tr>
@@ -47,7 +55,11 @@
                             </td>
 
                             <td class="col-6">
-                                <p> lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem </p>
+                                @if (!empty($score->comment))
+                                    {{ $score->comment }}
+                                @else
+                                    <span class="text-danger">Belum Dinilai</span>
+                                @endif
                             </td>
                         </tr>
                     </table>

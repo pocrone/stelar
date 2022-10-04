@@ -149,9 +149,9 @@
                         "data": "status",
                         "render": function(data, type, row) {
                             if (data == '0')
-                                return 'Closed';
+                                return "<label class='badge badge-warning'>Closed</label>";
                             else
-                                return 'Open';
+                                return "<label class='badge badge-info'>Open</label>";
                         }
                     },
 

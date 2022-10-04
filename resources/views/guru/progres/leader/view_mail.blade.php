@@ -89,7 +89,7 @@
                     <hr>
                     @if ($mail->autograph_status == 0)
                         <p> Belum Disetujui </p>
-                        <a href="{{ route('approve_sign', $mail->id) }}"
+                        <a href="{{ route('approve_sign', $mail->inboxID) }}"
                             class="btn btn-sm bg-danger text-center text-white btn-block mt-3">
                             Setujui dan Beri TTD Surat
                         </a>

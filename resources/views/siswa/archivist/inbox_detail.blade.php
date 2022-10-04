@@ -156,11 +156,11 @@
                                         <tr>
                                             <td width=30%>Status Retensi</td>
                                             <td width=70% class="text-wrap">
-                                                @if ($data->status_retention == 1)
+                                                @if ($data->retention_status == 1)
                                                     {{ 'Ditinjau Kembali' }}
-                                                @elseif ($data->status_retention == 2)
+                                                @elseif ($data->retention_status == 2)
                                                     {{ 'Permanen' }}
-                                                @elseif ($data->status_retention == 3)
+                                                @elseif ($data->retention_status == 3)
                                                     {{ 'Musnah' }}
                                                 @else
                                                     {{ 'Belum Diatur' }}

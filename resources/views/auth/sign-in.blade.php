@@ -41,7 +41,7 @@
                         <!-- Content -->
                         <div class="content text-center">
                             <div class="logo mb-0">
-                                <a href="index.html"><img src="{{ asset('assets/images/logo.png') }}"
+                                <a href="{{ route('landing_page') }}"><img src="{{ asset('assets/images/logo.png') }}"
                                         style="width: 150px;" alt=""></a>
                             </div>
                             <div class="title-text">
